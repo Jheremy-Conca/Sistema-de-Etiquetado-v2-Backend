@@ -1,0 +1,141 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ──────────────────────────────────────────
+// USUARIO
+// Espejo local de Supabase Auth: la autenticación (email +
+// password) vive 100% en Supabase (auth.users), acá solo se
+// guarda el rol y el nombre para mostrar en la UI. supabaseUserId
+// es el id (UUID) que devuelve Supabase Auth al crear la cuenta.
+// ──────────────────────────────────────────
+model Usuario {
+  id             Int       @id @default(autoincrement())
+  supabaseUserId String    @unique
+  nombre         String
+  esAdmin        Boolean   @default(false)
+  avatarUrl      String?
+  permisos       Permiso[]
+  createdAt      DateTime  @default(now())
+}
+
+model Permiso {
+  id            Int      @id @default(autoincrement())
+  usuarioId     Int
+  usuario       Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  recurso       Recurso
+  puedeVer      Boolean  @default(false)
+  puedeCrear    Boolean  @default(false)
+  puedeEditar   Boolean  @default(false)
+  puedeEliminar Boolean  @default(false)
+
+  @@unique([usuarioId, recurso])
+}
+
+enum Recurso {
+  LOTES
+  PRODUCTOS
+  FABRICANTES
+  PLANTILLAS
+  COA
+  USUARIOS
+}
+
+// ──────────────────────────────────────────
+// FABRICANTE
+// Un fabricante puede proveer varios lotes (1:N), incluso de
+// productos distintos. No se permite repetir nombre — se valida
+// con nombreNormalizado (minúsculas + sin acentos) para evitar
+// duplicados tipo "Ácido Cítrico" vs "acido citrico".
+
+// ──────────────────────────────────────────
+model Fabricante {
+  id                Int      @id @default(autoincrement())
+  nombre            String   @unique
+  nombreNormalizado String   @unique
+  lotes             Lote[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("fabricantes")
+}
+
+// ──────────────────────────────────────────
+// PRODUCTO
+// Ya NO tiene fabricante fijo: un mismo producto puede tener
+// lotes de distintos fabricantes a lo largo del tiempo (el
+// fabricante varía por lote, no por producto). Nombre único a
+// nivel global.
+// ──────────────────────────────────────────
+model Producto {
+  id                 Int      @id @default(autoincrement())
+  nombre             String   @unique
+  nombreNormalizado  String   @unique
+  nfpaSalud          Int? // 0-4
+  nfpaInflamabilidad Int? // 0-4
+  nfpaReactividad    Int?
+  lotes              Lote[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("productos")
+}
+
+// ──────────────────────────────────────────
+// PLANTILLA
+// Independiente de Producto — se elige recién al generar la etiqueta.
+// ──────────────────────────────────────────
+model Plantilla {
+  id        Int      @id @default(autoincrement())
+  nombre    String   @unique
+  archivo   String
+  activa    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("plantillas")
+}
+
+// ──────────────────────────────────────────
+// LOTE
+// Acá vive la relación real con Fabricante: cada lote de un
+// producto puede venir de un fabricante distinto. Único por
+// producto + fabricante + número de lote (un mismo número de
+// lote podría repetirse entre fabricantes distintos, así que
+// fabricanteId entra en el constraint para no chocar por error).
+//
+// fechaFabricacion / fechaVencimiento van como String (no DateTime):
+// en el COA aparecen en formatos distintos según el proveedor —
+// a veces solo mes/año ("10/2025"), a veces día/mes/año
+// ("11/10/2025") — y se guarda tal cual se digita, sin forzar
+// un único formato de fecha ni perder esa información.
+// ──────────────────────────────────────────
+model Lote {
+  id                    Int        @id @default(autoincrement())
+  numeroLote            String
+  fechaFabricacion      String
+  fechaVencimiento      String
+  // Se calcula automáticamente en el service a partir de fechaVencimiento
+  // (parseando "MM/AAAA" como último día de ese mes, o "DD/MM/AAAA" tal cual).
+  // Nunca se edita a mano — solo existe para poder ordenar/filtrar
+  // ("lotes que vencen este mes") sin tocar el texto original.
+  fechaVencimientoOrden DateTime?  @db.Date
+  coaUrl                String? // path del objeto en el bucket, ej: "lote-123/coa.pdf"
+  productoId            Int
+  producto              Producto   @relation(fields: [productoId], references: [id], onDelete: Restrict)
+  fabricanteId          Int
+  fabricante            Fabricante @relation(fields: [fabricanteId], references: [id], onDelete: Restrict)
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+
+  @@unique([productoId, fabricanteId, numeroLote])
+  @@index([numeroLote])
+  @@index([fabricanteId])
+  @@map("lotes")
+}
