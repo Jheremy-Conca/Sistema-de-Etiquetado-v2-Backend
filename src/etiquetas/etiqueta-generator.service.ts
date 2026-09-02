@@ -128,12 +128,20 @@ export class EtiquetaGeneratorService {
             ? this.getFondoMuestrasBase64()
             : this.getFondoBase64();
 
+    // Solo embebemos Selawik cuando NO corremos en Windows (ej. Render/Linux),
+    // porque ahí Segoe UI no existe. En la PC Windows local, Segoe UI real
+    // ya está instalada y se referencia por nombre (evita el bug de la "J"
+    // asimétrica que tenía Selawik como sustituto).
+    const debeEmbeberFuente = process.platform !== 'win32';
+    const fontBase64 = debeEmbeberFuente ? this.getFontBase64() : null;
+    const fontBoldBase64 = debeEmbeberFuente ? this.getFontBoldBase64() : null;
+
     return template({
       widthPx: ETIQUETA_LABEL_PX.width,
       heightPx: ETIQUETA_LABEL_PX.height,
       fondoBase64,
-      fontBase64: this.getFontBase64(),
-      fontBoldBase64: this.getFontBoldBase64(),
+      fontBase64,
+      fontBoldBase64,
       fallbackFontFamily: 'Arial, sans-serif',
       producto: etiqueta.producto,
       numeroLote: etiqueta.numeroLote,

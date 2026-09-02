@@ -19,16 +19,16 @@
       */
 
       /*
-        FUENTE: se embebe Selawik como sustituto libre de Segoe UI
-        (Segoe UI es propietaria y no se puede redistribuir). Antes
-        se referenciaba 'Segoe UI' por nombre asumiendo que el backend
-        corría en la MISMA PC Windows de la impresora (que la trae de
-        fábrica) -> eso dejó de ser cierto al mover el backend a Render
-        (Linux, sin Segoe UI ni Selawik instaladas), así que las
-        etiquetas caían al fallback Arial. Se vuelve a embeber Selawik
-        vía @font-face + base64 para que el render sea idéntico sin
-        importar el sistema operativo donde corra Puppeteer.
+        FUENTE: solo se embebe Selawik (sustituto libre de Segoe UI,
+        que es propietaria y no se puede redistribuir) cuando el
+        backend NO corre en Windows -> ahí fontBase64 llega vacío
+        desde el service y este bloque no se imprime en absoluto,
+        dejando 'Segoe UI' real del sistema como antes (evita el bug
+        de la "J" asimétrica que tenía Selawik). En Render (Linux)
+        fontBase64 sí llega, y ahí sirve de sustituto porque Segoe UI
+        no existe en ese sistema operativo.
       */
+      {{#if fontBase64}}
       @font-face {
         font-family: 'Selawik';
         src: url('data:font/truetype;base64,{{{fontBase64}}}') format('truetype');
@@ -39,6 +39,7 @@
         src: url('data:font/truetype;base64,{{{fontBoldBase64}}}') format('truetype');
         font-weight: bold;
       }
+      {{/if}}
 
       body {
         /*
@@ -55,7 +56,7 @@
         */
         width:{{widthPx}}px;
                                   height:{{heightPx}}px;
-                                  font-family: 'Selawik', 'Segoe UI', {{{fallbackFontFamily}}};
+                                  font-family: {{#if fontBase64}}'Selawik', {{/if}}'Segoe UI', {{{fallbackFontFamily}}};
                                 }
 
                                 .etiqueta {
