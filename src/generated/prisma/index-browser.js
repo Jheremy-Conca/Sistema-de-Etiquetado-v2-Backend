@@ -200,7 +200,8 @@ exports.Recurso = exports.$Enums.Recurso = {
   FABRICANTES: 'FABRICANTES',
   PLANTILLAS: 'PLANTILLAS',
   COA: 'COA',
-  USUARIOS: 'USUARIOS'
+  USUARIOS: 'USUARIOS',
+  ETIQUETAS: 'ETIQUETAS'
 };
 
 exports.Prisma.ModelName = {

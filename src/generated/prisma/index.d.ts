@@ -54,7 +54,8 @@ export namespace $Enums {
   FABRICANTES: 'FABRICANTES',
   PLANTILLAS: 'PLANTILLAS',
   COA: 'COA',
-  USUARIOS: 'USUARIOS'
+  USUARIOS: 'USUARIOS',
+  ETIQUETAS: 'ETIQUETAS'
 };
 
 export type Recurso = (typeof Recurso)[keyof typeof Recurso]
