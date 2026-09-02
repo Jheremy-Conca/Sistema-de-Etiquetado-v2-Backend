@@ -1,7 +1,8 @@
 FROM node:22-slim
 
-# Librerías del sistema que necesita Chromium en runtime
+# Librerías del sistema + Chromium en runtime
 RUN apt-get update && apt-get install -y \
+    chromium \
     ca-certificates \
     fonts-liberation \
     libasound2 \
@@ -41,12 +42,15 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
+# Evita que Puppeteer intente descargar su propio Chrome durante npm install
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
 WORKDIR /app
 
 COPY package*.json ./
 COPY prisma ./prisma
 RUN npm install
-RUN npx puppeteer browsers clear && npx puppeteer browsers install chrome
 RUN npx prisma generate
 
 COPY . .
