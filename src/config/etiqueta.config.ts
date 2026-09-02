@@ -25,8 +25,3 @@ export const ETIQUETA_FUENTE_CONFIG = {
   fontFormat: 'truetype',
   fallbackFamily: 'Arial, sans-serif',
 };
-
-export const IMPRESORA_CONFIG = {
-  nombre: process.env.EPSON_PRINTER_NAME ?? 'EPSON TM-C3500 Ver2',
-  tamanoPapel: process.env.EPSON_PAPER_SIZE ?? 'Mate Brilloso 10x6 cm',
-};

@@ -1,10 +1,15 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { randomUUID } from 'crypto';
+
 
 @Injectable()
 export class SupabaseStorageService {
   private readonly client: SupabaseClient;
-  private readonly bucket = 'coas';
+  private readonly bucket = 'coas'
+  private readonly bucketTrabajos = 'trabajos-impresion';
+
+
 
   constructor() {
     const url = process.env.SUPABASE_URL;
@@ -52,4 +57,28 @@ export class SupabaseStorageService {
     }
     return data.signedUrl;
   }
+
+async uploadTrabajoImpresion(imagen: Buffer): Promise<string> {
+  const path = `${Date.now()}-${randomUUID()}.png`;
+  const { error } = await this.client.storage
+    .from(this.bucketTrabajos)
+    .upload(path, imagen, { contentType: 'image/png', upsert: false });
+  if (error) throw new InternalServerErrorException(`Error subiendo trabajo de impresión: ${error.message}`);
+  return path;
+}
+
+async deleteTrabajoImpresion(path: string): Promise<void> {
+  const { error } = await this.client.storage.from(this.bucketTrabajos).remove([path]);
+  if (error) throw new InternalServerErrorException(`Error eliminando trabajo de impresión: ${error.message}`);
+}
+
+async getSignedUrlTrabajoImpresion(path: string, expiresInSeconds = 600): Promise<string> {
+  const { data, error } = await this.client.storage
+    .from(this.bucketTrabajos)
+    .createSignedUrl(path, expiresInSeconds);
+  if (error || !data) throw new InternalServerErrorException(`Error generando signed URL: ${error?.message}`);
+  return data.signedUrl;
+}
+
+  
 }

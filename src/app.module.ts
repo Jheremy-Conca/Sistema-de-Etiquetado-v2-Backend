@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaModule } from './prisma/prisma.module';
 import { FabricantesModule } from './fabricantes/fabricantes.module';
 import { ProductosModule } from './productos/productos.module';
@@ -17,6 +18,7 @@ import { UsuariosModule } from './usuario/usuarios.module';
         limit: 100,   // máx. 100 peticiones por IP en esa ventana
       },
     ]),
+    ScheduleModule.forRoot(),
     PrismaModule,
     FabricantesModule,
     ProductosModule,

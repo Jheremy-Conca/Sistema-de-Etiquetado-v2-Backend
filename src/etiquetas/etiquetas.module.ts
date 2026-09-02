@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { EtiquetasController } from './etiquetas.controller';
-import { EtiquetasService } from './etiquetas.service';
 import { EtiquetaGeneratorService } from './etiqueta-generator.service';
-import { ImpresionService } from './impresion.service';
+import { TrabajosImpresionService } from './trabajos-impresion.service';
+import { LimpiezaTrabajosService } from './limpieza-trabajos.service';
+import { StorageModule } from '../storage/storage.module';
 
 @Module({
+  imports: [StorageModule],
   controllers: [EtiquetasController],
-  providers: [EtiquetasService, EtiquetaGeneratorService, ImpresionService],
+  providers: [EtiquetaGeneratorService, TrabajosImpresionService, LimpiezaTrabajosService],
 })
 export class EtiquetasModule {}

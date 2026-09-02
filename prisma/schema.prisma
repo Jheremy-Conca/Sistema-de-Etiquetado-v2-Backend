@@ -23,6 +23,8 @@ model Usuario {
   avatarUrl      String?
   permisos       Permiso[]
   createdAt      DateTime  @default(now())
+
+    trabajosImpresion TrabajoImpresion[]
 }
 
 model Permiso {
@@ -99,6 +101,7 @@ model Plantilla {
   activa    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+    trabajosImpresion TrabajoImpresion[]
 
   @@map("plantillas")
 }
@@ -134,9 +137,38 @@ model Lote {
   fabricante            Fabricante @relation(fields: [fabricanteId], references: [id], onDelete: Restrict)
   createdAt             DateTime   @default(now())
   updatedAt             DateTime   @updatedAt
+    trabajosImpresion TrabajoImpresion[]
 
   @@unique([productoId, fabricanteId, numeroLote])
   @@index([numeroLote])
   @@index([fabricanteId])
   @@map("lotes")
+}
+
+enum EstadoTrabajoImpresion {
+  PENDIENTE
+  IMPRESO
+  ERROR
+}
+
+model TrabajoImpresion {
+  id           Int                    @id @default(autoincrement())
+  loteId       Int
+  lote         Lote                   @relation(fields: [loteId], references: [id])
+  plantillaId  Int
+  plantilla    Plantilla              @relation(fields: [plantillaId], references: [id])
+  pesoBruto    String
+  unidadBruto  String
+  cantidadNeta String?
+  unidadNeta   String
+  proforma     String
+  imagenPath   String
+  estado       EstadoTrabajoImpresion @default(PENDIENTE)
+  mensajeError String?
+  creadoPorId  Int
+  creadoPor    Usuario                @relation(fields: [creadoPorId], references: [id])
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+
+  @@map("trabajos_impresion")
 }
