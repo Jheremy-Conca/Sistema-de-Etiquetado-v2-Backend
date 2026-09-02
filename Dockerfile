@@ -46,6 +46,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma
 RUN npm install
+RUN npx puppeteer browsers install chrome
 RUN npx prisma generate
 
 COPY . .
