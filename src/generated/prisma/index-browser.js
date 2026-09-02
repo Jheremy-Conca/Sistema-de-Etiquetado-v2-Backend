@@ -180,6 +180,23 @@ exports.Prisma.LoteScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TrabajoImpresionScalarFieldEnum = {
+  id: 'id',
+  loteId: 'loteId',
+  plantillaId: 'plantillaId',
+  pesoBruto: 'pesoBruto',
+  unidadBruto: 'unidadBruto',
+  cantidadNeta: 'cantidadNeta',
+  unidadNeta: 'unidadNeta',
+  proforma: 'proforma',
+  imagenPath: 'imagenPath',
+  estado: 'estado',
+  mensajeError: 'mensajeError',
+  creadoPorId: 'creadoPorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -204,13 +221,20 @@ exports.Recurso = exports.$Enums.Recurso = {
   ETIQUETAS: 'ETIQUETAS'
 };
 
+exports.EstadoTrabajoImpresion = exports.$Enums.EstadoTrabajoImpresion = {
+  PENDIENTE: 'PENDIENTE',
+  IMPRESO: 'IMPRESO',
+  ERROR: 'ERROR'
+};
+
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Permiso: 'Permiso',
   Fabricante: 'Fabricante',
   Producto: 'Producto',
   Plantilla: 'Plantilla',
-  Lote: 'Lote'
+  Lote: 'Lote',
+  TrabajoImpresion: 'TrabajoImpresion'
 };
 
 /**

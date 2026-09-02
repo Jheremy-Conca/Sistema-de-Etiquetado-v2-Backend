@@ -43,6 +43,11 @@ export type Plantilla = $Result.DefaultSelection<Prisma.$PlantillaPayload>
  * 
  */
 export type Lote = $Result.DefaultSelection<Prisma.$LotePayload>
+/**
+ * Model TrabajoImpresion
+ * 
+ */
+export type TrabajoImpresion = $Result.DefaultSelection<Prisma.$TrabajoImpresionPayload>
 
 /**
  * Enums
@@ -60,11 +65,24 @@ export namespace $Enums {
 
 export type Recurso = (typeof Recurso)[keyof typeof Recurso]
 
+
+export const EstadoTrabajoImpresion: {
+  PENDIENTE: 'PENDIENTE',
+  IMPRESO: 'IMPRESO',
+  ERROR: 'ERROR'
+};
+
+export type EstadoTrabajoImpresion = (typeof EstadoTrabajoImpresion)[keyof typeof EstadoTrabajoImpresion]
+
 }
 
 export type Recurso = $Enums.Recurso
 
 export const Recurso: typeof $Enums.Recurso
+
+export type EstadoTrabajoImpresion = $Enums.EstadoTrabajoImpresion
+
+export const EstadoTrabajoImpresion: typeof $Enums.EstadoTrabajoImpresion
 
 /**
  * ##  Prisma Client ʲˢ
@@ -246,6 +264,16 @@ export class PrismaClient<
     * ```
     */
   get lote(): Prisma.LoteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.trabajoImpresion`: Exposes CRUD operations for the **TrabajoImpresion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TrabajoImpresions
+    * const trabajoImpresions = await prisma.trabajoImpresion.findMany()
+    * ```
+    */
+  get trabajoImpresion(): Prisma.TrabajoImpresionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -698,7 +726,8 @@ export namespace Prisma {
     Fabricante: 'Fabricante',
     Producto: 'Producto',
     Plantilla: 'Plantilla',
-    Lote: 'Lote'
+    Lote: 'Lote',
+    TrabajoImpresion: 'TrabajoImpresion'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -714,7 +743,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "usuario" | "permiso" | "fabricante" | "producto" | "plantilla" | "lote"
+      modelProps: "usuario" | "permiso" | "fabricante" | "producto" | "plantilla" | "lote" | "trabajoImpresion"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1162,6 +1191,80 @@ export namespace Prisma {
           }
         }
       }
+      TrabajoImpresion: {
+        payload: Prisma.$TrabajoImpresionPayload<ExtArgs>
+        fields: Prisma.TrabajoImpresionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TrabajoImpresionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TrabajoImpresionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>
+          }
+          findFirst: {
+            args: Prisma.TrabajoImpresionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TrabajoImpresionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>
+          }
+          findMany: {
+            args: Prisma.TrabajoImpresionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>[]
+          }
+          create: {
+            args: Prisma.TrabajoImpresionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>
+          }
+          createMany: {
+            args: Prisma.TrabajoImpresionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TrabajoImpresionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>[]
+          }
+          delete: {
+            args: Prisma.TrabajoImpresionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>
+          }
+          update: {
+            args: Prisma.TrabajoImpresionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>
+          }
+          deleteMany: {
+            args: Prisma.TrabajoImpresionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TrabajoImpresionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TrabajoImpresionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>[]
+          }
+          upsert: {
+            args: Prisma.TrabajoImpresionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TrabajoImpresionPayload>
+          }
+          aggregate: {
+            args: Prisma.TrabajoImpresionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTrabajoImpresion>
+          }
+          groupBy: {
+            args: Prisma.TrabajoImpresionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TrabajoImpresionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TrabajoImpresionCountArgs<ExtArgs>
+            result: $Utils.Optional<TrabajoImpresionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1291,6 +1394,7 @@ export namespace Prisma {
     producto?: ProductoOmit
     plantilla?: PlantillaOmit
     lote?: LoteOmit
+    trabajoImpresion?: TrabajoImpresionOmit
   }
 
   /* Types for Logging */
@@ -1372,10 +1476,12 @@ export namespace Prisma {
 
   export type UsuarioCountOutputType = {
     permisos: number
+    trabajosImpresion: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permisos?: boolean | UsuarioCountOutputTypeCountPermisosArgs
+    trabajosImpresion?: boolean | UsuarioCountOutputTypeCountTrabajosImpresionArgs
   }
 
   // Custom InputTypes
@@ -1394,6 +1500,13 @@ export namespace Prisma {
    */
   export type UsuarioCountOutputTypeCountPermisosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PermisoWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountTrabajosImpresionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrabajoImpresionWhereInput
   }
 
 
@@ -1456,6 +1569,68 @@ export namespace Prisma {
    */
   export type ProductoCountOutputTypeCountLotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LoteWhereInput
+  }
+
+
+  /**
+   * Count Type PlantillaCountOutputType
+   */
+
+  export type PlantillaCountOutputType = {
+    trabajosImpresion: number
+  }
+
+  export type PlantillaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trabajosImpresion?: boolean | PlantillaCountOutputTypeCountTrabajosImpresionArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlantillaCountOutputType without action
+   */
+  export type PlantillaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlantillaCountOutputType
+     */
+    select?: PlantillaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PlantillaCountOutputType without action
+   */
+  export type PlantillaCountOutputTypeCountTrabajosImpresionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrabajoImpresionWhereInput
+  }
+
+
+  /**
+   * Count Type LoteCountOutputType
+   */
+
+  export type LoteCountOutputType = {
+    trabajosImpresion: number
+  }
+
+  export type LoteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trabajosImpresion?: boolean | LoteCountOutputTypeCountTrabajosImpresionArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LoteCountOutputType without action
+   */
+  export type LoteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LoteCountOutputType
+     */
+    select?: LoteCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LoteCountOutputType without action
+   */
+  export type LoteCountOutputTypeCountTrabajosImpresionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrabajoImpresionWhereInput
   }
 
 
@@ -1670,6 +1845,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     createdAt?: boolean
     permisos?: boolean | Usuario$permisosArgs<ExtArgs>
+    trabajosImpresion?: boolean | Usuario$trabajosImpresionArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
@@ -1703,6 +1879,7 @@ export namespace Prisma {
   export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "supabaseUserId" | "nombre" | "esAdmin" | "avatarUrl" | "createdAt", ExtArgs["result"]["usuario"]>
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permisos?: boolean | Usuario$permisosArgs<ExtArgs>
+    trabajosImpresion?: boolean | Usuario$trabajosImpresionArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1712,6 +1889,7 @@ export namespace Prisma {
     name: "Usuario"
     objects: {
       permisos: Prisma.$PermisoPayload<ExtArgs>[]
+      trabajosImpresion: Prisma.$TrabajoImpresionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2115,6 +2293,7 @@ export namespace Prisma {
   export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     permisos<T extends Usuario$permisosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$permisosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermisoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    trabajosImpresion<T extends Usuario$trabajosImpresionArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$trabajosImpresionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2564,6 +2743,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PermisoScalarFieldEnum | PermisoScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.trabajosImpresion
+   */
+  export type Usuario$trabajosImpresionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    where?: TrabajoImpresionWhereInput
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    cursor?: TrabajoImpresionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TrabajoImpresionScalarFieldEnum | TrabajoImpresionScalarFieldEnum[]
   }
 
   /**
@@ -6187,6 +6390,8 @@ export namespace Prisma {
     activa?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    trabajosImpresion?: boolean | Plantilla$trabajosImpresionArgs<ExtArgs>
+    _count?: boolean | PlantillaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["plantilla"]>
 
   export type PlantillaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6217,10 +6422,18 @@ export namespace Prisma {
   }
 
   export type PlantillaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "archivo" | "activa" | "createdAt" | "updatedAt", ExtArgs["result"]["plantilla"]>
+  export type PlantillaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    trabajosImpresion?: boolean | Plantilla$trabajosImpresionArgs<ExtArgs>
+    _count?: boolean | PlantillaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PlantillaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PlantillaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $PlantillaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Plantilla"
-    objects: {}
+    objects: {
+      trabajosImpresion: Prisma.$TrabajoImpresionPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nombre: string
@@ -6622,6 +6835,7 @@ export namespace Prisma {
    */
   export interface Prisma__PlantillaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    trabajosImpresion<T extends Plantilla$trabajosImpresionArgs<ExtArgs> = {}>(args?: Subset<T, Plantilla$trabajosImpresionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6674,6 +6888,10 @@ export namespace Prisma {
      */
     omit?: PlantillaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
+    /**
      * Filter, which Plantilla to fetch.
      */
     where: PlantillaWhereUniqueInput
@@ -6692,6 +6910,10 @@ export namespace Prisma {
      */
     omit?: PlantillaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
+    /**
      * Filter, which Plantilla to fetch.
      */
     where: PlantillaWhereUniqueInput
@@ -6709,6 +6931,10 @@ export namespace Prisma {
      * Omit specific fields from the Plantilla
      */
     omit?: PlantillaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
     /**
      * Filter, which Plantilla to fetch.
      */
@@ -6758,6 +6984,10 @@ export namespace Prisma {
      */
     omit?: PlantillaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
+    /**
      * Filter, which Plantilla to fetch.
      */
     where?: PlantillaWhereInput
@@ -6805,6 +7035,10 @@ export namespace Prisma {
      * Omit specific fields from the Plantilla
      */
     omit?: PlantillaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
     /**
      * Filter, which Plantillas to fetch.
      */
@@ -6854,6 +7088,10 @@ export namespace Prisma {
      */
     omit?: PlantillaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
+    /**
      * The data needed to create a Plantilla.
      */
     data: XOR<PlantillaCreateInput, PlantillaUncheckedCreateInput>
@@ -6901,6 +7139,10 @@ export namespace Prisma {
      * Omit specific fields from the Plantilla
      */
     omit?: PlantillaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
     /**
      * The data needed to update a Plantilla.
      */
@@ -6968,6 +7210,10 @@ export namespace Prisma {
      */
     omit?: PlantillaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
+    /**
      * The filter to search for the Plantilla to update in case it exists.
      */
     where: PlantillaWhereUniqueInput
@@ -6994,6 +7240,10 @@ export namespace Prisma {
      */
     omit?: PlantillaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
+    /**
      * Filter which Plantilla to delete.
      */
     where: PlantillaWhereUniqueInput
@@ -7014,6 +7264,30 @@ export namespace Prisma {
   }
 
   /**
+   * Plantilla.trabajosImpresion
+   */
+  export type Plantilla$trabajosImpresionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    where?: TrabajoImpresionWhereInput
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    cursor?: TrabajoImpresionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TrabajoImpresionScalarFieldEnum | TrabajoImpresionScalarFieldEnum[]
+  }
+
+  /**
    * Plantilla without action
    */
   export type PlantillaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7025,6 +7299,10 @@ export namespace Prisma {
      * Omit specific fields from the Plantilla
      */
     omit?: PlantillaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlantillaInclude<ExtArgs> | null
   }
 
 
@@ -7276,6 +7554,8 @@ export namespace Prisma {
     updatedAt?: boolean
     producto?: boolean | ProductoDefaultArgs<ExtArgs>
     fabricante?: boolean | FabricanteDefaultArgs<ExtArgs>
+    trabajosImpresion?: boolean | Lote$trabajosImpresionArgs<ExtArgs>
+    _count?: boolean | LoteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["lote"]>
 
   export type LoteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7325,6 +7605,8 @@ export namespace Prisma {
   export type LoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     producto?: boolean | ProductoDefaultArgs<ExtArgs>
     fabricante?: boolean | FabricanteDefaultArgs<ExtArgs>
+    trabajosImpresion?: boolean | Lote$trabajosImpresionArgs<ExtArgs>
+    _count?: boolean | LoteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LoteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     producto?: boolean | ProductoDefaultArgs<ExtArgs>
@@ -7340,6 +7622,7 @@ export namespace Prisma {
     objects: {
       producto: Prisma.$ProductoPayload<ExtArgs>
       fabricante: Prisma.$FabricantePayload<ExtArgs>
+      trabajosImpresion: Prisma.$TrabajoImpresionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -7748,6 +8031,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     producto<T extends ProductoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductoDefaultArgs<ExtArgs>>): Prisma__ProductoClient<$Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     fabricante<T extends FabricanteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FabricanteDefaultArgs<ExtArgs>>): Prisma__FabricanteClient<$Result.GetResult<Prisma.$FabricantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    trabajosImpresion<T extends Lote$trabajosImpresionArgs<ExtArgs> = {}>(args?: Subset<T, Lote$trabajosImpresionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8188,6 +8472,30 @@ export namespace Prisma {
   }
 
   /**
+   * Lote.trabajosImpresion
+   */
+  export type Lote$trabajosImpresionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    where?: TrabajoImpresionWhereInput
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    cursor?: TrabajoImpresionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TrabajoImpresionScalarFieldEnum | TrabajoImpresionScalarFieldEnum[]
+  }
+
+  /**
    * Lote without action
    */
   export type LoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8203,6 +8511,1248 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: LoteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TrabajoImpresion
+   */
+
+  export type AggregateTrabajoImpresion = {
+    _count: TrabajoImpresionCountAggregateOutputType | null
+    _avg: TrabajoImpresionAvgAggregateOutputType | null
+    _sum: TrabajoImpresionSumAggregateOutputType | null
+    _min: TrabajoImpresionMinAggregateOutputType | null
+    _max: TrabajoImpresionMaxAggregateOutputType | null
+  }
+
+  export type TrabajoImpresionAvgAggregateOutputType = {
+    id: number | null
+    loteId: number | null
+    plantillaId: number | null
+    creadoPorId: number | null
+  }
+
+  export type TrabajoImpresionSumAggregateOutputType = {
+    id: number | null
+    loteId: number | null
+    plantillaId: number | null
+    creadoPorId: number | null
+  }
+
+  export type TrabajoImpresionMinAggregateOutputType = {
+    id: number | null
+    loteId: number | null
+    plantillaId: number | null
+    pesoBruto: string | null
+    unidadBruto: string | null
+    cantidadNeta: string | null
+    unidadNeta: string | null
+    proforma: string | null
+    imagenPath: string | null
+    estado: $Enums.EstadoTrabajoImpresion | null
+    mensajeError: string | null
+    creadoPorId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TrabajoImpresionMaxAggregateOutputType = {
+    id: number | null
+    loteId: number | null
+    plantillaId: number | null
+    pesoBruto: string | null
+    unidadBruto: string | null
+    cantidadNeta: string | null
+    unidadNeta: string | null
+    proforma: string | null
+    imagenPath: string | null
+    estado: $Enums.EstadoTrabajoImpresion | null
+    mensajeError: string | null
+    creadoPorId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TrabajoImpresionCountAggregateOutputType = {
+    id: number
+    loteId: number
+    plantillaId: number
+    pesoBruto: number
+    unidadBruto: number
+    cantidadNeta: number
+    unidadNeta: number
+    proforma: number
+    imagenPath: number
+    estado: number
+    mensajeError: number
+    creadoPorId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TrabajoImpresionAvgAggregateInputType = {
+    id?: true
+    loteId?: true
+    plantillaId?: true
+    creadoPorId?: true
+  }
+
+  export type TrabajoImpresionSumAggregateInputType = {
+    id?: true
+    loteId?: true
+    plantillaId?: true
+    creadoPorId?: true
+  }
+
+  export type TrabajoImpresionMinAggregateInputType = {
+    id?: true
+    loteId?: true
+    plantillaId?: true
+    pesoBruto?: true
+    unidadBruto?: true
+    cantidadNeta?: true
+    unidadNeta?: true
+    proforma?: true
+    imagenPath?: true
+    estado?: true
+    mensajeError?: true
+    creadoPorId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TrabajoImpresionMaxAggregateInputType = {
+    id?: true
+    loteId?: true
+    plantillaId?: true
+    pesoBruto?: true
+    unidadBruto?: true
+    cantidadNeta?: true
+    unidadNeta?: true
+    proforma?: true
+    imagenPath?: true
+    estado?: true
+    mensajeError?: true
+    creadoPorId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TrabajoImpresionCountAggregateInputType = {
+    id?: true
+    loteId?: true
+    plantillaId?: true
+    pesoBruto?: true
+    unidadBruto?: true
+    cantidadNeta?: true
+    unidadNeta?: true
+    proforma?: true
+    imagenPath?: true
+    estado?: true
+    mensajeError?: true
+    creadoPorId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TrabajoImpresionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrabajoImpresion to aggregate.
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrabajoImpresions to fetch.
+     */
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TrabajoImpresionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrabajoImpresions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrabajoImpresions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TrabajoImpresions
+    **/
+    _count?: true | TrabajoImpresionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TrabajoImpresionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TrabajoImpresionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TrabajoImpresionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TrabajoImpresionMaxAggregateInputType
+  }
+
+  export type GetTrabajoImpresionAggregateType<T extends TrabajoImpresionAggregateArgs> = {
+        [P in keyof T & keyof AggregateTrabajoImpresion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTrabajoImpresion[P]>
+      : GetScalarType<T[P], AggregateTrabajoImpresion[P]>
+  }
+
+
+
+
+  export type TrabajoImpresionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TrabajoImpresionWhereInput
+    orderBy?: TrabajoImpresionOrderByWithAggregationInput | TrabajoImpresionOrderByWithAggregationInput[]
+    by: TrabajoImpresionScalarFieldEnum[] | TrabajoImpresionScalarFieldEnum
+    having?: TrabajoImpresionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TrabajoImpresionCountAggregateInputType | true
+    _avg?: TrabajoImpresionAvgAggregateInputType
+    _sum?: TrabajoImpresionSumAggregateInputType
+    _min?: TrabajoImpresionMinAggregateInputType
+    _max?: TrabajoImpresionMaxAggregateInputType
+  }
+
+  export type TrabajoImpresionGroupByOutputType = {
+    id: number
+    loteId: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado: $Enums.EstadoTrabajoImpresion
+    mensajeError: string | null
+    creadoPorId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: TrabajoImpresionCountAggregateOutputType | null
+    _avg: TrabajoImpresionAvgAggregateOutputType | null
+    _sum: TrabajoImpresionSumAggregateOutputType | null
+    _min: TrabajoImpresionMinAggregateOutputType | null
+    _max: TrabajoImpresionMaxAggregateOutputType | null
+  }
+
+  type GetTrabajoImpresionGroupByPayload<T extends TrabajoImpresionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TrabajoImpresionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TrabajoImpresionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TrabajoImpresionGroupByOutputType[P]>
+            : GetScalarType<T[P], TrabajoImpresionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TrabajoImpresionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    loteId?: boolean
+    plantillaId?: boolean
+    pesoBruto?: boolean
+    unidadBruto?: boolean
+    cantidadNeta?: boolean
+    unidadNeta?: boolean
+    proforma?: boolean
+    imagenPath?: boolean
+    estado?: boolean
+    mensajeError?: boolean
+    creadoPorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    plantilla?: boolean | PlantillaDefaultArgs<ExtArgs>
+    creadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trabajoImpresion"]>
+
+  export type TrabajoImpresionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    loteId?: boolean
+    plantillaId?: boolean
+    pesoBruto?: boolean
+    unidadBruto?: boolean
+    cantidadNeta?: boolean
+    unidadNeta?: boolean
+    proforma?: boolean
+    imagenPath?: boolean
+    estado?: boolean
+    mensajeError?: boolean
+    creadoPorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    plantilla?: boolean | PlantillaDefaultArgs<ExtArgs>
+    creadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trabajoImpresion"]>
+
+  export type TrabajoImpresionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    loteId?: boolean
+    plantillaId?: boolean
+    pesoBruto?: boolean
+    unidadBruto?: boolean
+    cantidadNeta?: boolean
+    unidadNeta?: boolean
+    proforma?: boolean
+    imagenPath?: boolean
+    estado?: boolean
+    mensajeError?: boolean
+    creadoPorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    plantilla?: boolean | PlantillaDefaultArgs<ExtArgs>
+    creadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["trabajoImpresion"]>
+
+  export type TrabajoImpresionSelectScalar = {
+    id?: boolean
+    loteId?: boolean
+    plantillaId?: boolean
+    pesoBruto?: boolean
+    unidadBruto?: boolean
+    cantidadNeta?: boolean
+    unidadNeta?: boolean
+    proforma?: boolean
+    imagenPath?: boolean
+    estado?: boolean
+    mensajeError?: boolean
+    creadoPorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TrabajoImpresionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "loteId" | "plantillaId" | "pesoBruto" | "unidadBruto" | "cantidadNeta" | "unidadNeta" | "proforma" | "imagenPath" | "estado" | "mensajeError" | "creadoPorId" | "createdAt" | "updatedAt", ExtArgs["result"]["trabajoImpresion"]>
+  export type TrabajoImpresionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    plantilla?: boolean | PlantillaDefaultArgs<ExtArgs>
+    creadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+  export type TrabajoImpresionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    plantilla?: boolean | PlantillaDefaultArgs<ExtArgs>
+    creadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+  export type TrabajoImpresionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lote?: boolean | LoteDefaultArgs<ExtArgs>
+    plantilla?: boolean | PlantillaDefaultArgs<ExtArgs>
+    creadoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+
+  export type $TrabajoImpresionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TrabajoImpresion"
+    objects: {
+      lote: Prisma.$LotePayload<ExtArgs>
+      plantilla: Prisma.$PlantillaPayload<ExtArgs>
+      creadoPor: Prisma.$UsuarioPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      loteId: number
+      plantillaId: number
+      pesoBruto: string
+      unidadBruto: string
+      cantidadNeta: string | null
+      unidadNeta: string
+      proforma: string
+      imagenPath: string
+      estado: $Enums.EstadoTrabajoImpresion
+      mensajeError: string | null
+      creadoPorId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["trabajoImpresion"]>
+    composites: {}
+  }
+
+  type TrabajoImpresionGetPayload<S extends boolean | null | undefined | TrabajoImpresionDefaultArgs> = $Result.GetResult<Prisma.$TrabajoImpresionPayload, S>
+
+  type TrabajoImpresionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TrabajoImpresionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TrabajoImpresionCountAggregateInputType | true
+    }
+
+  export interface TrabajoImpresionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TrabajoImpresion'], meta: { name: 'TrabajoImpresion' } }
+    /**
+     * Find zero or one TrabajoImpresion that matches the filter.
+     * @param {TrabajoImpresionFindUniqueArgs} args - Arguments to find a TrabajoImpresion
+     * @example
+     * // Get one TrabajoImpresion
+     * const trabajoImpresion = await prisma.trabajoImpresion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TrabajoImpresionFindUniqueArgs>(args: SelectSubset<T, TrabajoImpresionFindUniqueArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TrabajoImpresion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TrabajoImpresionFindUniqueOrThrowArgs} args - Arguments to find a TrabajoImpresion
+     * @example
+     * // Get one TrabajoImpresion
+     * const trabajoImpresion = await prisma.trabajoImpresion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TrabajoImpresionFindUniqueOrThrowArgs>(args: SelectSubset<T, TrabajoImpresionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TrabajoImpresion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionFindFirstArgs} args - Arguments to find a TrabajoImpresion
+     * @example
+     * // Get one TrabajoImpresion
+     * const trabajoImpresion = await prisma.trabajoImpresion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TrabajoImpresionFindFirstArgs>(args?: SelectSubset<T, TrabajoImpresionFindFirstArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TrabajoImpresion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionFindFirstOrThrowArgs} args - Arguments to find a TrabajoImpresion
+     * @example
+     * // Get one TrabajoImpresion
+     * const trabajoImpresion = await prisma.trabajoImpresion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TrabajoImpresionFindFirstOrThrowArgs>(args?: SelectSubset<T, TrabajoImpresionFindFirstOrThrowArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TrabajoImpresions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TrabajoImpresions
+     * const trabajoImpresions = await prisma.trabajoImpresion.findMany()
+     * 
+     * // Get first 10 TrabajoImpresions
+     * const trabajoImpresions = await prisma.trabajoImpresion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const trabajoImpresionWithIdOnly = await prisma.trabajoImpresion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TrabajoImpresionFindManyArgs>(args?: SelectSubset<T, TrabajoImpresionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TrabajoImpresion.
+     * @param {TrabajoImpresionCreateArgs} args - Arguments to create a TrabajoImpresion.
+     * @example
+     * // Create one TrabajoImpresion
+     * const TrabajoImpresion = await prisma.trabajoImpresion.create({
+     *   data: {
+     *     // ... data to create a TrabajoImpresion
+     *   }
+     * })
+     * 
+     */
+    create<T extends TrabajoImpresionCreateArgs>(args: SelectSubset<T, TrabajoImpresionCreateArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TrabajoImpresions.
+     * @param {TrabajoImpresionCreateManyArgs} args - Arguments to create many TrabajoImpresions.
+     * @example
+     * // Create many TrabajoImpresions
+     * const trabajoImpresion = await prisma.trabajoImpresion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TrabajoImpresionCreateManyArgs>(args?: SelectSubset<T, TrabajoImpresionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TrabajoImpresions and returns the data saved in the database.
+     * @param {TrabajoImpresionCreateManyAndReturnArgs} args - Arguments to create many TrabajoImpresions.
+     * @example
+     * // Create many TrabajoImpresions
+     * const trabajoImpresion = await prisma.trabajoImpresion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TrabajoImpresions and only return the `id`
+     * const trabajoImpresionWithIdOnly = await prisma.trabajoImpresion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TrabajoImpresionCreateManyAndReturnArgs>(args?: SelectSubset<T, TrabajoImpresionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TrabajoImpresion.
+     * @param {TrabajoImpresionDeleteArgs} args - Arguments to delete one TrabajoImpresion.
+     * @example
+     * // Delete one TrabajoImpresion
+     * const TrabajoImpresion = await prisma.trabajoImpresion.delete({
+     *   where: {
+     *     // ... filter to delete one TrabajoImpresion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TrabajoImpresionDeleteArgs>(args: SelectSubset<T, TrabajoImpresionDeleteArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TrabajoImpresion.
+     * @param {TrabajoImpresionUpdateArgs} args - Arguments to update one TrabajoImpresion.
+     * @example
+     * // Update one TrabajoImpresion
+     * const trabajoImpresion = await prisma.trabajoImpresion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TrabajoImpresionUpdateArgs>(args: SelectSubset<T, TrabajoImpresionUpdateArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TrabajoImpresions.
+     * @param {TrabajoImpresionDeleteManyArgs} args - Arguments to filter TrabajoImpresions to delete.
+     * @example
+     * // Delete a few TrabajoImpresions
+     * const { count } = await prisma.trabajoImpresion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TrabajoImpresionDeleteManyArgs>(args?: SelectSubset<T, TrabajoImpresionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrabajoImpresions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TrabajoImpresions
+     * const trabajoImpresion = await prisma.trabajoImpresion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TrabajoImpresionUpdateManyArgs>(args: SelectSubset<T, TrabajoImpresionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TrabajoImpresions and returns the data updated in the database.
+     * @param {TrabajoImpresionUpdateManyAndReturnArgs} args - Arguments to update many TrabajoImpresions.
+     * @example
+     * // Update many TrabajoImpresions
+     * const trabajoImpresion = await prisma.trabajoImpresion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TrabajoImpresions and only return the `id`
+     * const trabajoImpresionWithIdOnly = await prisma.trabajoImpresion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TrabajoImpresionUpdateManyAndReturnArgs>(args: SelectSubset<T, TrabajoImpresionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TrabajoImpresion.
+     * @param {TrabajoImpresionUpsertArgs} args - Arguments to update or create a TrabajoImpresion.
+     * @example
+     * // Update or create a TrabajoImpresion
+     * const trabajoImpresion = await prisma.trabajoImpresion.upsert({
+     *   create: {
+     *     // ... data to create a TrabajoImpresion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TrabajoImpresion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TrabajoImpresionUpsertArgs>(args: SelectSubset<T, TrabajoImpresionUpsertArgs<ExtArgs>>): Prisma__TrabajoImpresionClient<$Result.GetResult<Prisma.$TrabajoImpresionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TrabajoImpresions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionCountArgs} args - Arguments to filter TrabajoImpresions to count.
+     * @example
+     * // Count the number of TrabajoImpresions
+     * const count = await prisma.trabajoImpresion.count({
+     *   where: {
+     *     // ... the filter for the TrabajoImpresions we want to count
+     *   }
+     * })
+    **/
+    count<T extends TrabajoImpresionCountArgs>(
+      args?: Subset<T, TrabajoImpresionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TrabajoImpresionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TrabajoImpresion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TrabajoImpresionAggregateArgs>(args: Subset<T, TrabajoImpresionAggregateArgs>): Prisma.PrismaPromise<GetTrabajoImpresionAggregateType<T>>
+
+    /**
+     * Group by TrabajoImpresion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TrabajoImpresionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TrabajoImpresionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TrabajoImpresionGroupByArgs['orderBy'] }
+        : { orderBy?: TrabajoImpresionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TrabajoImpresionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTrabajoImpresionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TrabajoImpresion model
+   */
+  readonly fields: TrabajoImpresionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TrabajoImpresion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TrabajoImpresionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    lote<T extends LoteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LoteDefaultArgs<ExtArgs>>): Prisma__LoteClient<$Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    plantilla<T extends PlantillaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlantillaDefaultArgs<ExtArgs>>): Prisma__PlantillaClient<$Result.GetResult<Prisma.$PlantillaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    creadoPor<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TrabajoImpresion model
+   */
+  interface TrabajoImpresionFieldRefs {
+    readonly id: FieldRef<"TrabajoImpresion", 'Int'>
+    readonly loteId: FieldRef<"TrabajoImpresion", 'Int'>
+    readonly plantillaId: FieldRef<"TrabajoImpresion", 'Int'>
+    readonly pesoBruto: FieldRef<"TrabajoImpresion", 'String'>
+    readonly unidadBruto: FieldRef<"TrabajoImpresion", 'String'>
+    readonly cantidadNeta: FieldRef<"TrabajoImpresion", 'String'>
+    readonly unidadNeta: FieldRef<"TrabajoImpresion", 'String'>
+    readonly proforma: FieldRef<"TrabajoImpresion", 'String'>
+    readonly imagenPath: FieldRef<"TrabajoImpresion", 'String'>
+    readonly estado: FieldRef<"TrabajoImpresion", 'EstadoTrabajoImpresion'>
+    readonly mensajeError: FieldRef<"TrabajoImpresion", 'String'>
+    readonly creadoPorId: FieldRef<"TrabajoImpresion", 'Int'>
+    readonly createdAt: FieldRef<"TrabajoImpresion", 'DateTime'>
+    readonly updatedAt: FieldRef<"TrabajoImpresion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TrabajoImpresion findUnique
+   */
+  export type TrabajoImpresionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * Filter, which TrabajoImpresion to fetch.
+     */
+    where: TrabajoImpresionWhereUniqueInput
+  }
+
+  /**
+   * TrabajoImpresion findUniqueOrThrow
+   */
+  export type TrabajoImpresionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * Filter, which TrabajoImpresion to fetch.
+     */
+    where: TrabajoImpresionWhereUniqueInput
+  }
+
+  /**
+   * TrabajoImpresion findFirst
+   */
+  export type TrabajoImpresionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * Filter, which TrabajoImpresion to fetch.
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrabajoImpresions to fetch.
+     */
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrabajoImpresions.
+     */
+    cursor?: TrabajoImpresionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrabajoImpresions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrabajoImpresions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrabajoImpresions.
+     */
+    distinct?: TrabajoImpresionScalarFieldEnum | TrabajoImpresionScalarFieldEnum[]
+  }
+
+  /**
+   * TrabajoImpresion findFirstOrThrow
+   */
+  export type TrabajoImpresionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * Filter, which TrabajoImpresion to fetch.
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrabajoImpresions to fetch.
+     */
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TrabajoImpresions.
+     */
+    cursor?: TrabajoImpresionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrabajoImpresions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrabajoImpresions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrabajoImpresions.
+     */
+    distinct?: TrabajoImpresionScalarFieldEnum | TrabajoImpresionScalarFieldEnum[]
+  }
+
+  /**
+   * TrabajoImpresion findMany
+   */
+  export type TrabajoImpresionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * Filter, which TrabajoImpresions to fetch.
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TrabajoImpresions to fetch.
+     */
+    orderBy?: TrabajoImpresionOrderByWithRelationInput | TrabajoImpresionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TrabajoImpresions.
+     */
+    cursor?: TrabajoImpresionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TrabajoImpresions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TrabajoImpresions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TrabajoImpresions.
+     */
+    distinct?: TrabajoImpresionScalarFieldEnum | TrabajoImpresionScalarFieldEnum[]
+  }
+
+  /**
+   * TrabajoImpresion create
+   */
+  export type TrabajoImpresionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TrabajoImpresion.
+     */
+    data: XOR<TrabajoImpresionCreateInput, TrabajoImpresionUncheckedCreateInput>
+  }
+
+  /**
+   * TrabajoImpresion createMany
+   */
+  export type TrabajoImpresionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TrabajoImpresions.
+     */
+    data: TrabajoImpresionCreateManyInput | TrabajoImpresionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TrabajoImpresion createManyAndReturn
+   */
+  export type TrabajoImpresionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * The data used to create many TrabajoImpresions.
+     */
+    data: TrabajoImpresionCreateManyInput | TrabajoImpresionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TrabajoImpresion update
+   */
+  export type TrabajoImpresionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TrabajoImpresion.
+     */
+    data: XOR<TrabajoImpresionUpdateInput, TrabajoImpresionUncheckedUpdateInput>
+    /**
+     * Choose, which TrabajoImpresion to update.
+     */
+    where: TrabajoImpresionWhereUniqueInput
+  }
+
+  /**
+   * TrabajoImpresion updateMany
+   */
+  export type TrabajoImpresionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TrabajoImpresions.
+     */
+    data: XOR<TrabajoImpresionUpdateManyMutationInput, TrabajoImpresionUncheckedUpdateManyInput>
+    /**
+     * Filter which TrabajoImpresions to update
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * Limit how many TrabajoImpresions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TrabajoImpresion updateManyAndReturn
+   */
+  export type TrabajoImpresionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * The data used to update TrabajoImpresions.
+     */
+    data: XOR<TrabajoImpresionUpdateManyMutationInput, TrabajoImpresionUncheckedUpdateManyInput>
+    /**
+     * Filter which TrabajoImpresions to update
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * Limit how many TrabajoImpresions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TrabajoImpresion upsert
+   */
+  export type TrabajoImpresionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TrabajoImpresion to update in case it exists.
+     */
+    where: TrabajoImpresionWhereUniqueInput
+    /**
+     * In case the TrabajoImpresion found by the `where` argument doesn't exist, create a new TrabajoImpresion with this data.
+     */
+    create: XOR<TrabajoImpresionCreateInput, TrabajoImpresionUncheckedCreateInput>
+    /**
+     * In case the TrabajoImpresion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TrabajoImpresionUpdateInput, TrabajoImpresionUncheckedUpdateInput>
+  }
+
+  /**
+   * TrabajoImpresion delete
+   */
+  export type TrabajoImpresionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
+    /**
+     * Filter which TrabajoImpresion to delete.
+     */
+    where: TrabajoImpresionWhereUniqueInput
+  }
+
+  /**
+   * TrabajoImpresion deleteMany
+   */
+  export type TrabajoImpresionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TrabajoImpresions to delete
+     */
+    where?: TrabajoImpresionWhereInput
+    /**
+     * Limit how many TrabajoImpresions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TrabajoImpresion without action
+   */
+  export type TrabajoImpresionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TrabajoImpresion
+     */
+    select?: TrabajoImpresionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TrabajoImpresion
+     */
+    omit?: TrabajoImpresionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TrabajoImpresionInclude<ExtArgs> | null
   }
 
 
@@ -8298,6 +9848,26 @@ export namespace Prisma {
   export type LoteScalarFieldEnum = (typeof LoteScalarFieldEnum)[keyof typeof LoteScalarFieldEnum]
 
 
+  export const TrabajoImpresionScalarFieldEnum: {
+    id: 'id',
+    loteId: 'loteId',
+    plantillaId: 'plantillaId',
+    pesoBruto: 'pesoBruto',
+    unidadBruto: 'unidadBruto',
+    cantidadNeta: 'cantidadNeta',
+    unidadNeta: 'unidadNeta',
+    proforma: 'proforma',
+    imagenPath: 'imagenPath',
+    estado: 'estado',
+    mensajeError: 'mensajeError',
+    creadoPorId: 'creadoPorId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TrabajoImpresionScalarFieldEnum = (typeof TrabajoImpresionScalarFieldEnum)[keyof typeof TrabajoImpresionScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -8391,6 +9961,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EstadoTrabajoImpresion'
+   */
+  export type EnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoTrabajoImpresion'>
+    
+
+
+  /**
+   * Reference to a field of type 'EstadoTrabajoImpresion[]'
+   */
+  export type ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoTrabajoImpresion[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -8418,6 +10002,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"Usuario"> | string | null
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
     permisos?: PermisoListRelationFilter
+    trabajosImpresion?: TrabajoImpresionListRelationFilter
   }
 
   export type UsuarioOrderByWithRelationInput = {
@@ -8428,6 +10013,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     permisos?: PermisoOrderByRelationAggregateInput
+    trabajosImpresion?: TrabajoImpresionOrderByRelationAggregateInput
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -8441,6 +10027,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"Usuario"> | string | null
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
     permisos?: PermisoListRelationFilter
+    trabajosImpresion?: TrabajoImpresionListRelationFilter
   }, "id" | "supabaseUserId">
 
   export type UsuarioOrderByWithAggregationInput = {
@@ -8676,6 +10263,7 @@ export namespace Prisma {
     activa?: BoolFilter<"Plantilla"> | boolean
     createdAt?: DateTimeFilter<"Plantilla"> | Date | string
     updatedAt?: DateTimeFilter<"Plantilla"> | Date | string
+    trabajosImpresion?: TrabajoImpresionListRelationFilter
   }
 
   export type PlantillaOrderByWithRelationInput = {
@@ -8685,6 +10273,7 @@ export namespace Prisma {
     activa?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    trabajosImpresion?: TrabajoImpresionOrderByRelationAggregateInput
   }
 
   export type PlantillaWhereUniqueInput = Prisma.AtLeast<{
@@ -8697,6 +10286,7 @@ export namespace Prisma {
     activa?: BoolFilter<"Plantilla"> | boolean
     createdAt?: DateTimeFilter<"Plantilla"> | Date | string
     updatedAt?: DateTimeFilter<"Plantilla"> | Date | string
+    trabajosImpresion?: TrabajoImpresionListRelationFilter
   }, "id" | "nombre">
 
   export type PlantillaOrderByWithAggregationInput = {
@@ -8741,6 +10331,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Lote"> | Date | string
     producto?: XOR<ProductoScalarRelationFilter, ProductoWhereInput>
     fabricante?: XOR<FabricanteScalarRelationFilter, FabricanteWhereInput>
+    trabajosImpresion?: TrabajoImpresionListRelationFilter
   }
 
   export type LoteOrderByWithRelationInput = {
@@ -8756,6 +10347,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     producto?: ProductoOrderByWithRelationInput
     fabricante?: FabricanteOrderByWithRelationInput
+    trabajosImpresion?: TrabajoImpresionOrderByRelationAggregateInput
   }
 
   export type LoteWhereUniqueInput = Prisma.AtLeast<{
@@ -8775,6 +10367,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Lote"> | Date | string
     producto?: XOR<ProductoScalarRelationFilter, ProductoWhereInput>
     fabricante?: XOR<FabricanteScalarRelationFilter, FabricanteWhereInput>
+    trabajosImpresion?: TrabajoImpresionListRelationFilter
   }, "id" | "productoId_fabricanteId_numeroLote">
 
   export type LoteOrderByWithAggregationInput = {
@@ -8811,6 +10404,114 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Lote"> | Date | string
   }
 
+  export type TrabajoImpresionWhereInput = {
+    AND?: TrabajoImpresionWhereInput | TrabajoImpresionWhereInput[]
+    OR?: TrabajoImpresionWhereInput[]
+    NOT?: TrabajoImpresionWhereInput | TrabajoImpresionWhereInput[]
+    id?: IntFilter<"TrabajoImpresion"> | number
+    loteId?: IntFilter<"TrabajoImpresion"> | number
+    plantillaId?: IntFilter<"TrabajoImpresion"> | number
+    pesoBruto?: StringFilter<"TrabajoImpresion"> | string
+    unidadBruto?: StringFilter<"TrabajoImpresion"> | string
+    cantidadNeta?: StringNullableFilter<"TrabajoImpresion"> | string | null
+    unidadNeta?: StringFilter<"TrabajoImpresion"> | string
+    proforma?: StringFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringFilter<"TrabajoImpresion"> | string
+    estado?: EnumEstadoTrabajoImpresionFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
+    mensajeError?: StringNullableFilter<"TrabajoImpresion"> | string | null
+    creadoPorId?: IntFilter<"TrabajoImpresion"> | number
+    createdAt?: DateTimeFilter<"TrabajoImpresion"> | Date | string
+    updatedAt?: DateTimeFilter<"TrabajoImpresion"> | Date | string
+    lote?: XOR<LoteScalarRelationFilter, LoteWhereInput>
+    plantilla?: XOR<PlantillaScalarRelationFilter, PlantillaWhereInput>
+    creadoPor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+  }
+
+  export type TrabajoImpresionOrderByWithRelationInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    pesoBruto?: SortOrder
+    unidadBruto?: SortOrder
+    cantidadNeta?: SortOrderInput | SortOrder
+    unidadNeta?: SortOrder
+    proforma?: SortOrder
+    imagenPath?: SortOrder
+    estado?: SortOrder
+    mensajeError?: SortOrderInput | SortOrder
+    creadoPorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    lote?: LoteOrderByWithRelationInput
+    plantilla?: PlantillaOrderByWithRelationInput
+    creadoPor?: UsuarioOrderByWithRelationInput
+  }
+
+  export type TrabajoImpresionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: TrabajoImpresionWhereInput | TrabajoImpresionWhereInput[]
+    OR?: TrabajoImpresionWhereInput[]
+    NOT?: TrabajoImpresionWhereInput | TrabajoImpresionWhereInput[]
+    loteId?: IntFilter<"TrabajoImpresion"> | number
+    plantillaId?: IntFilter<"TrabajoImpresion"> | number
+    pesoBruto?: StringFilter<"TrabajoImpresion"> | string
+    unidadBruto?: StringFilter<"TrabajoImpresion"> | string
+    cantidadNeta?: StringNullableFilter<"TrabajoImpresion"> | string | null
+    unidadNeta?: StringFilter<"TrabajoImpresion"> | string
+    proforma?: StringFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringFilter<"TrabajoImpresion"> | string
+    estado?: EnumEstadoTrabajoImpresionFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
+    mensajeError?: StringNullableFilter<"TrabajoImpresion"> | string | null
+    creadoPorId?: IntFilter<"TrabajoImpresion"> | number
+    createdAt?: DateTimeFilter<"TrabajoImpresion"> | Date | string
+    updatedAt?: DateTimeFilter<"TrabajoImpresion"> | Date | string
+    lote?: XOR<LoteScalarRelationFilter, LoteWhereInput>
+    plantilla?: XOR<PlantillaScalarRelationFilter, PlantillaWhereInput>
+    creadoPor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+  }, "id">
+
+  export type TrabajoImpresionOrderByWithAggregationInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    pesoBruto?: SortOrder
+    unidadBruto?: SortOrder
+    cantidadNeta?: SortOrderInput | SortOrder
+    unidadNeta?: SortOrder
+    proforma?: SortOrder
+    imagenPath?: SortOrder
+    estado?: SortOrder
+    mensajeError?: SortOrderInput | SortOrder
+    creadoPorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TrabajoImpresionCountOrderByAggregateInput
+    _avg?: TrabajoImpresionAvgOrderByAggregateInput
+    _max?: TrabajoImpresionMaxOrderByAggregateInput
+    _min?: TrabajoImpresionMinOrderByAggregateInput
+    _sum?: TrabajoImpresionSumOrderByAggregateInput
+  }
+
+  export type TrabajoImpresionScalarWhereWithAggregatesInput = {
+    AND?: TrabajoImpresionScalarWhereWithAggregatesInput | TrabajoImpresionScalarWhereWithAggregatesInput[]
+    OR?: TrabajoImpresionScalarWhereWithAggregatesInput[]
+    NOT?: TrabajoImpresionScalarWhereWithAggregatesInput | TrabajoImpresionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TrabajoImpresion"> | number
+    loteId?: IntWithAggregatesFilter<"TrabajoImpresion"> | number
+    plantillaId?: IntWithAggregatesFilter<"TrabajoImpresion"> | number
+    pesoBruto?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
+    unidadBruto?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
+    cantidadNeta?: StringNullableWithAggregatesFilter<"TrabajoImpresion"> | string | null
+    unidadNeta?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
+    proforma?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
+    estado?: EnumEstadoTrabajoImpresionWithAggregatesFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
+    mensajeError?: StringNullableWithAggregatesFilter<"TrabajoImpresion"> | string | null
+    creadoPorId?: IntWithAggregatesFilter<"TrabajoImpresion"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"TrabajoImpresion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TrabajoImpresion"> | Date | string
+  }
+
   export type UsuarioCreateInput = {
     supabaseUserId: string
     nombre: string
@@ -8818,6 +10519,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     createdAt?: Date | string
     permisos?: PermisoCreateNestedManyWithoutUsuarioInput
+    trabajosImpresion?: TrabajoImpresionCreateNestedManyWithoutCreadoPorInput
   }
 
   export type UsuarioUncheckedCreateInput = {
@@ -8828,6 +10530,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     createdAt?: Date | string
     permisos?: PermisoUncheckedCreateNestedManyWithoutUsuarioInput
+    trabajosImpresion?: TrabajoImpresionUncheckedCreateNestedManyWithoutCreadoPorInput
   }
 
   export type UsuarioUpdateInput = {
@@ -8837,6 +10540,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     permisos?: PermisoUpdateManyWithoutUsuarioNestedInput
+    trabajosImpresion?: TrabajoImpresionUpdateManyWithoutCreadoPorNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
@@ -8847,6 +10551,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     permisos?: PermisoUncheckedUpdateManyWithoutUsuarioNestedInput
+    trabajosImpresion?: TrabajoImpresionUncheckedUpdateManyWithoutCreadoPorNestedInput
   }
 
   export type UsuarioCreateManyInput = {
@@ -9082,6 +10787,7 @@ export namespace Prisma {
     activa?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionCreateNestedManyWithoutPlantillaInput
   }
 
   export type PlantillaUncheckedCreateInput = {
@@ -9091,6 +10797,7 @@ export namespace Prisma {
     activa?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedCreateNestedManyWithoutPlantillaInput
   }
 
   export type PlantillaUpdateInput = {
@@ -9099,6 +10806,7 @@ export namespace Prisma {
     activa?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUpdateManyWithoutPlantillaNestedInput
   }
 
   export type PlantillaUncheckedUpdateInput = {
@@ -9108,6 +10816,7 @@ export namespace Prisma {
     activa?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedUpdateManyWithoutPlantillaNestedInput
   }
 
   export type PlantillaCreateManyInput = {
@@ -9146,6 +10855,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     producto: ProductoCreateNestedOneWithoutLotesInput
     fabricante: FabricanteCreateNestedOneWithoutLotesInput
+    trabajosImpresion?: TrabajoImpresionCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUncheckedCreateInput = {
@@ -9159,6 +10869,7 @@ export namespace Prisma {
     fabricanteId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUpdateInput = {
@@ -9171,6 +10882,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     producto?: ProductoUpdateOneRequiredWithoutLotesNestedInput
     fabricante?: FabricanteUpdateOneRequiredWithoutLotesNestedInput
+    trabajosImpresion?: TrabajoImpresionUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateInput = {
@@ -9184,6 +10896,7 @@ export namespace Prisma {
     fabricanteId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteCreateManyInput = {
@@ -9218,6 +10931,119 @@ export namespace Prisma {
     coaUrl?: NullableStringFieldUpdateOperationsInput | string | null
     productoId?: IntFieldUpdateOperationsInput | number
     fabricanteId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionCreateInput = {
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lote: LoteCreateNestedOneWithoutTrabajosImpresionInput
+    plantilla: PlantillaCreateNestedOneWithoutTrabajosImpresionInput
+    creadoPor: UsuarioCreateNestedOneWithoutTrabajosImpresionInput
+  }
+
+  export type TrabajoImpresionUncheckedCreateInput = {
+    id?: number
+    loteId: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    creadoPorId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionUpdateInput = {
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lote?: LoteUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+    plantilla?: PlantillaUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+    creadoPor?: UsuarioUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+  }
+
+  export type TrabajoImpresionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    loteId?: IntFieldUpdateOperationsInput | number
+    plantillaId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoPorId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionCreateManyInput = {
+    id?: number
+    loteId: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    creadoPorId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionUpdateManyMutationInput = {
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    loteId?: IntFieldUpdateOperationsInput | number
+    plantillaId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoPorId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9285,12 +11111,22 @@ export namespace Prisma {
     none?: PermisoWhereInput
   }
 
+  export type TrabajoImpresionListRelationFilter = {
+    every?: TrabajoImpresionWhereInput
+    some?: TrabajoImpresionWhereInput
+    none?: TrabajoImpresionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type PermisoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TrabajoImpresionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9713,6 +11549,98 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type EnumEstadoTrabajoImpresionFilter<$PrismaModel = never> = {
+    equals?: $Enums.EstadoTrabajoImpresion | EnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    in?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel> | $Enums.EstadoTrabajoImpresion
+  }
+
+  export type LoteScalarRelationFilter = {
+    is?: LoteWhereInput
+    isNot?: LoteWhereInput
+  }
+
+  export type PlantillaScalarRelationFilter = {
+    is?: PlantillaWhereInput
+    isNot?: PlantillaWhereInput
+  }
+
+  export type TrabajoImpresionCountOrderByAggregateInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    pesoBruto?: SortOrder
+    unidadBruto?: SortOrder
+    cantidadNeta?: SortOrder
+    unidadNeta?: SortOrder
+    proforma?: SortOrder
+    imagenPath?: SortOrder
+    estado?: SortOrder
+    mensajeError?: SortOrder
+    creadoPorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TrabajoImpresionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    creadoPorId?: SortOrder
+  }
+
+  export type TrabajoImpresionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    pesoBruto?: SortOrder
+    unidadBruto?: SortOrder
+    cantidadNeta?: SortOrder
+    unidadNeta?: SortOrder
+    proforma?: SortOrder
+    imagenPath?: SortOrder
+    estado?: SortOrder
+    mensajeError?: SortOrder
+    creadoPorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TrabajoImpresionMinOrderByAggregateInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    pesoBruto?: SortOrder
+    unidadBruto?: SortOrder
+    cantidadNeta?: SortOrder
+    unidadNeta?: SortOrder
+    proforma?: SortOrder
+    imagenPath?: SortOrder
+    estado?: SortOrder
+    mensajeError?: SortOrder
+    creadoPorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TrabajoImpresionSumOrderByAggregateInput = {
+    id?: SortOrder
+    loteId?: SortOrder
+    plantillaId?: SortOrder
+    creadoPorId?: SortOrder
+  }
+
+  export type EnumEstadoTrabajoImpresionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EstadoTrabajoImpresion | EnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    in?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEstadoTrabajoImpresionWithAggregatesFilter<$PrismaModel> | $Enums.EstadoTrabajoImpresion
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel>
+    _max?: NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel>
+  }
+
   export type PermisoCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<PermisoCreateWithoutUsuarioInput, PermisoUncheckedCreateWithoutUsuarioInput> | PermisoCreateWithoutUsuarioInput[] | PermisoUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: PermisoCreateOrConnectWithoutUsuarioInput | PermisoCreateOrConnectWithoutUsuarioInput[]
@@ -9720,11 +11648,25 @@ export namespace Prisma {
     connect?: PermisoWhereUniqueInput | PermisoWhereUniqueInput[]
   }
 
+  export type TrabajoImpresionCreateNestedManyWithoutCreadoPorInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutCreadoPorInput, TrabajoImpresionUncheckedCreateWithoutCreadoPorInput> | TrabajoImpresionCreateWithoutCreadoPorInput[] | TrabajoImpresionUncheckedCreateWithoutCreadoPorInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutCreadoPorInput | TrabajoImpresionCreateOrConnectWithoutCreadoPorInput[]
+    createMany?: TrabajoImpresionCreateManyCreadoPorInputEnvelope
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+  }
+
   export type PermisoUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<PermisoCreateWithoutUsuarioInput, PermisoUncheckedCreateWithoutUsuarioInput> | PermisoCreateWithoutUsuarioInput[] | PermisoUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: PermisoCreateOrConnectWithoutUsuarioInput | PermisoCreateOrConnectWithoutUsuarioInput[]
     createMany?: PermisoCreateManyUsuarioInputEnvelope
     connect?: PermisoWhereUniqueInput | PermisoWhereUniqueInput[]
+  }
+
+  export type TrabajoImpresionUncheckedCreateNestedManyWithoutCreadoPorInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutCreadoPorInput, TrabajoImpresionUncheckedCreateWithoutCreadoPorInput> | TrabajoImpresionCreateWithoutCreadoPorInput[] | TrabajoImpresionUncheckedCreateWithoutCreadoPorInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutCreadoPorInput | TrabajoImpresionCreateOrConnectWithoutCreadoPorInput[]
+    createMany?: TrabajoImpresionCreateManyCreadoPorInputEnvelope
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9757,6 +11699,20 @@ export namespace Prisma {
     deleteMany?: PermisoScalarWhereInput | PermisoScalarWhereInput[]
   }
 
+  export type TrabajoImpresionUpdateManyWithoutCreadoPorNestedInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutCreadoPorInput, TrabajoImpresionUncheckedCreateWithoutCreadoPorInput> | TrabajoImpresionCreateWithoutCreadoPorInput[] | TrabajoImpresionUncheckedCreateWithoutCreadoPorInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutCreadoPorInput | TrabajoImpresionCreateOrConnectWithoutCreadoPorInput[]
+    upsert?: TrabajoImpresionUpsertWithWhereUniqueWithoutCreadoPorInput | TrabajoImpresionUpsertWithWhereUniqueWithoutCreadoPorInput[]
+    createMany?: TrabajoImpresionCreateManyCreadoPorInputEnvelope
+    set?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    disconnect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    delete?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    update?: TrabajoImpresionUpdateWithWhereUniqueWithoutCreadoPorInput | TrabajoImpresionUpdateWithWhereUniqueWithoutCreadoPorInput[]
+    updateMany?: TrabajoImpresionUpdateManyWithWhereWithoutCreadoPorInput | TrabajoImpresionUpdateManyWithWhereWithoutCreadoPorInput[]
+    deleteMany?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -9777,6 +11733,20 @@ export namespace Prisma {
     update?: PermisoUpdateWithWhereUniqueWithoutUsuarioInput | PermisoUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: PermisoUpdateManyWithWhereWithoutUsuarioInput | PermisoUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: PermisoScalarWhereInput | PermisoScalarWhereInput[]
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyWithoutCreadoPorNestedInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutCreadoPorInput, TrabajoImpresionUncheckedCreateWithoutCreadoPorInput> | TrabajoImpresionCreateWithoutCreadoPorInput[] | TrabajoImpresionUncheckedCreateWithoutCreadoPorInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutCreadoPorInput | TrabajoImpresionCreateOrConnectWithoutCreadoPorInput[]
+    upsert?: TrabajoImpresionUpsertWithWhereUniqueWithoutCreadoPorInput | TrabajoImpresionUpsertWithWhereUniqueWithoutCreadoPorInput[]
+    createMany?: TrabajoImpresionCreateManyCreadoPorInputEnvelope
+    set?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    disconnect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    delete?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    update?: TrabajoImpresionUpdateWithWhereUniqueWithoutCreadoPorInput | TrabajoImpresionUpdateWithWhereUniqueWithoutCreadoPorInput[]
+    updateMany?: TrabajoImpresionUpdateManyWithWhereWithoutCreadoPorInput | TrabajoImpresionUpdateManyWithWhereWithoutCreadoPorInput[]
+    deleteMany?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
   }
 
   export type UsuarioCreateNestedOneWithoutPermisosInput = {
@@ -9889,6 +11859,48 @@ export namespace Prisma {
     deleteMany?: LoteScalarWhereInput | LoteScalarWhereInput[]
   }
 
+  export type TrabajoImpresionCreateNestedManyWithoutPlantillaInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutPlantillaInput, TrabajoImpresionUncheckedCreateWithoutPlantillaInput> | TrabajoImpresionCreateWithoutPlantillaInput[] | TrabajoImpresionUncheckedCreateWithoutPlantillaInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutPlantillaInput | TrabajoImpresionCreateOrConnectWithoutPlantillaInput[]
+    createMany?: TrabajoImpresionCreateManyPlantillaInputEnvelope
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+  }
+
+  export type TrabajoImpresionUncheckedCreateNestedManyWithoutPlantillaInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutPlantillaInput, TrabajoImpresionUncheckedCreateWithoutPlantillaInput> | TrabajoImpresionCreateWithoutPlantillaInput[] | TrabajoImpresionUncheckedCreateWithoutPlantillaInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutPlantillaInput | TrabajoImpresionCreateOrConnectWithoutPlantillaInput[]
+    createMany?: TrabajoImpresionCreateManyPlantillaInputEnvelope
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+  }
+
+  export type TrabajoImpresionUpdateManyWithoutPlantillaNestedInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutPlantillaInput, TrabajoImpresionUncheckedCreateWithoutPlantillaInput> | TrabajoImpresionCreateWithoutPlantillaInput[] | TrabajoImpresionUncheckedCreateWithoutPlantillaInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutPlantillaInput | TrabajoImpresionCreateOrConnectWithoutPlantillaInput[]
+    upsert?: TrabajoImpresionUpsertWithWhereUniqueWithoutPlantillaInput | TrabajoImpresionUpsertWithWhereUniqueWithoutPlantillaInput[]
+    createMany?: TrabajoImpresionCreateManyPlantillaInputEnvelope
+    set?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    disconnect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    delete?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    update?: TrabajoImpresionUpdateWithWhereUniqueWithoutPlantillaInput | TrabajoImpresionUpdateWithWhereUniqueWithoutPlantillaInput[]
+    updateMany?: TrabajoImpresionUpdateManyWithWhereWithoutPlantillaInput | TrabajoImpresionUpdateManyWithWhereWithoutPlantillaInput[]
+    deleteMany?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyWithoutPlantillaNestedInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutPlantillaInput, TrabajoImpresionUncheckedCreateWithoutPlantillaInput> | TrabajoImpresionCreateWithoutPlantillaInput[] | TrabajoImpresionUncheckedCreateWithoutPlantillaInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutPlantillaInput | TrabajoImpresionCreateOrConnectWithoutPlantillaInput[]
+    upsert?: TrabajoImpresionUpsertWithWhereUniqueWithoutPlantillaInput | TrabajoImpresionUpsertWithWhereUniqueWithoutPlantillaInput[]
+    createMany?: TrabajoImpresionCreateManyPlantillaInputEnvelope
+    set?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    disconnect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    delete?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    update?: TrabajoImpresionUpdateWithWhereUniqueWithoutPlantillaInput | TrabajoImpresionUpdateWithWhereUniqueWithoutPlantillaInput[]
+    updateMany?: TrabajoImpresionUpdateManyWithWhereWithoutPlantillaInput | TrabajoImpresionUpdateManyWithWhereWithoutPlantillaInput[]
+    deleteMany?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+  }
+
   export type ProductoCreateNestedOneWithoutLotesInput = {
     create?: XOR<ProductoCreateWithoutLotesInput, ProductoUncheckedCreateWithoutLotesInput>
     connectOrCreate?: ProductoCreateOrConnectWithoutLotesInput
@@ -9899,6 +11911,20 @@ export namespace Prisma {
     create?: XOR<FabricanteCreateWithoutLotesInput, FabricanteUncheckedCreateWithoutLotesInput>
     connectOrCreate?: FabricanteCreateOrConnectWithoutLotesInput
     connect?: FabricanteWhereUniqueInput
+  }
+
+  export type TrabajoImpresionCreateNestedManyWithoutLoteInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutLoteInput, TrabajoImpresionUncheckedCreateWithoutLoteInput> | TrabajoImpresionCreateWithoutLoteInput[] | TrabajoImpresionUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutLoteInput | TrabajoImpresionCreateOrConnectWithoutLoteInput[]
+    createMany?: TrabajoImpresionCreateManyLoteInputEnvelope
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+  }
+
+  export type TrabajoImpresionUncheckedCreateNestedManyWithoutLoteInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutLoteInput, TrabajoImpresionUncheckedCreateWithoutLoteInput> | TrabajoImpresionCreateWithoutLoteInput[] | TrabajoImpresionUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutLoteInput | TrabajoImpresionCreateOrConnectWithoutLoteInput[]
+    createMany?: TrabajoImpresionCreateManyLoteInputEnvelope
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -9919,6 +11945,80 @@ export namespace Prisma {
     upsert?: FabricanteUpsertWithoutLotesInput
     connect?: FabricanteWhereUniqueInput
     update?: XOR<XOR<FabricanteUpdateToOneWithWhereWithoutLotesInput, FabricanteUpdateWithoutLotesInput>, FabricanteUncheckedUpdateWithoutLotesInput>
+  }
+
+  export type TrabajoImpresionUpdateManyWithoutLoteNestedInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutLoteInput, TrabajoImpresionUncheckedCreateWithoutLoteInput> | TrabajoImpresionCreateWithoutLoteInput[] | TrabajoImpresionUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutLoteInput | TrabajoImpresionCreateOrConnectWithoutLoteInput[]
+    upsert?: TrabajoImpresionUpsertWithWhereUniqueWithoutLoteInput | TrabajoImpresionUpsertWithWhereUniqueWithoutLoteInput[]
+    createMany?: TrabajoImpresionCreateManyLoteInputEnvelope
+    set?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    disconnect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    delete?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    update?: TrabajoImpresionUpdateWithWhereUniqueWithoutLoteInput | TrabajoImpresionUpdateWithWhereUniqueWithoutLoteInput[]
+    updateMany?: TrabajoImpresionUpdateManyWithWhereWithoutLoteInput | TrabajoImpresionUpdateManyWithWhereWithoutLoteInput[]
+    deleteMany?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyWithoutLoteNestedInput = {
+    create?: XOR<TrabajoImpresionCreateWithoutLoteInput, TrabajoImpresionUncheckedCreateWithoutLoteInput> | TrabajoImpresionCreateWithoutLoteInput[] | TrabajoImpresionUncheckedCreateWithoutLoteInput[]
+    connectOrCreate?: TrabajoImpresionCreateOrConnectWithoutLoteInput | TrabajoImpresionCreateOrConnectWithoutLoteInput[]
+    upsert?: TrabajoImpresionUpsertWithWhereUniqueWithoutLoteInput | TrabajoImpresionUpsertWithWhereUniqueWithoutLoteInput[]
+    createMany?: TrabajoImpresionCreateManyLoteInputEnvelope
+    set?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    disconnect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    delete?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    connect?: TrabajoImpresionWhereUniqueInput | TrabajoImpresionWhereUniqueInput[]
+    update?: TrabajoImpresionUpdateWithWhereUniqueWithoutLoteInput | TrabajoImpresionUpdateWithWhereUniqueWithoutLoteInput[]
+    updateMany?: TrabajoImpresionUpdateManyWithWhereWithoutLoteInput | TrabajoImpresionUpdateManyWithWhereWithoutLoteInput[]
+    deleteMany?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+  }
+
+  export type LoteCreateNestedOneWithoutTrabajosImpresionInput = {
+    create?: XOR<LoteCreateWithoutTrabajosImpresionInput, LoteUncheckedCreateWithoutTrabajosImpresionInput>
+    connectOrCreate?: LoteCreateOrConnectWithoutTrabajosImpresionInput
+    connect?: LoteWhereUniqueInput
+  }
+
+  export type PlantillaCreateNestedOneWithoutTrabajosImpresionInput = {
+    create?: XOR<PlantillaCreateWithoutTrabajosImpresionInput, PlantillaUncheckedCreateWithoutTrabajosImpresionInput>
+    connectOrCreate?: PlantillaCreateOrConnectWithoutTrabajosImpresionInput
+    connect?: PlantillaWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutTrabajosImpresionInput = {
+    create?: XOR<UsuarioCreateWithoutTrabajosImpresionInput, UsuarioUncheckedCreateWithoutTrabajosImpresionInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutTrabajosImpresionInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type EnumEstadoTrabajoImpresionFieldUpdateOperationsInput = {
+    set?: $Enums.EstadoTrabajoImpresion
+  }
+
+  export type LoteUpdateOneRequiredWithoutTrabajosImpresionNestedInput = {
+    create?: XOR<LoteCreateWithoutTrabajosImpresionInput, LoteUncheckedCreateWithoutTrabajosImpresionInput>
+    connectOrCreate?: LoteCreateOrConnectWithoutTrabajosImpresionInput
+    upsert?: LoteUpsertWithoutTrabajosImpresionInput
+    connect?: LoteWhereUniqueInput
+    update?: XOR<XOR<LoteUpdateToOneWithWhereWithoutTrabajosImpresionInput, LoteUpdateWithoutTrabajosImpresionInput>, LoteUncheckedUpdateWithoutTrabajosImpresionInput>
+  }
+
+  export type PlantillaUpdateOneRequiredWithoutTrabajosImpresionNestedInput = {
+    create?: XOR<PlantillaCreateWithoutTrabajosImpresionInput, PlantillaUncheckedCreateWithoutTrabajosImpresionInput>
+    connectOrCreate?: PlantillaCreateOrConnectWithoutTrabajosImpresionInput
+    upsert?: PlantillaUpsertWithoutTrabajosImpresionInput
+    connect?: PlantillaWhereUniqueInput
+    update?: XOR<XOR<PlantillaUpdateToOneWithWhereWithoutTrabajosImpresionInput, PlantillaUpdateWithoutTrabajosImpresionInput>, PlantillaUncheckedUpdateWithoutTrabajosImpresionInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutTrabajosImpresionNestedInput = {
+    create?: XOR<UsuarioCreateWithoutTrabajosImpresionInput, UsuarioUncheckedCreateWithoutTrabajosImpresionInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutTrabajosImpresionInput
+    upsert?: UsuarioUpsertWithoutTrabajosImpresionInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutTrabajosImpresionInput, UsuarioUpdateWithoutTrabajosImpresionInput>, UsuarioUncheckedUpdateWithoutTrabajosImpresionInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -10139,6 +12239,23 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel = never> = {
+    equals?: $Enums.EstadoTrabajoImpresion | EnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    in?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel> | $Enums.EstadoTrabajoImpresion
+  }
+
+  export type NestedEnumEstadoTrabajoImpresionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EstadoTrabajoImpresion | EnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    in?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EstadoTrabajoImpresion[] | ListEnumEstadoTrabajoImpresionFieldRefInput<$PrismaModel>
+    not?: NestedEnumEstadoTrabajoImpresionWithAggregatesFilter<$PrismaModel> | $Enums.EstadoTrabajoImpresion
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel>
+    _max?: NestedEnumEstadoTrabajoImpresionFilter<$PrismaModel>
+  }
+
   export type PermisoCreateWithoutUsuarioInput = {
     recurso: $Enums.Recurso
     puedeVer?: boolean
@@ -10163,6 +12280,47 @@ export namespace Prisma {
 
   export type PermisoCreateManyUsuarioInputEnvelope = {
     data: PermisoCreateManyUsuarioInput | PermisoCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TrabajoImpresionCreateWithoutCreadoPorInput = {
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lote: LoteCreateNestedOneWithoutTrabajosImpresionInput
+    plantilla: PlantillaCreateNestedOneWithoutTrabajosImpresionInput
+  }
+
+  export type TrabajoImpresionUncheckedCreateWithoutCreadoPorInput = {
+    id?: number
+    loteId: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionCreateOrConnectWithoutCreadoPorInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    create: XOR<TrabajoImpresionCreateWithoutCreadoPorInput, TrabajoImpresionUncheckedCreateWithoutCreadoPorInput>
+  }
+
+  export type TrabajoImpresionCreateManyCreadoPorInputEnvelope = {
+    data: TrabajoImpresionCreateManyCreadoPorInput | TrabajoImpresionCreateManyCreadoPorInput[]
     skipDuplicates?: boolean
   }
 
@@ -10195,12 +12353,49 @@ export namespace Prisma {
     puedeEliminar?: BoolFilter<"Permiso"> | boolean
   }
 
+  export type TrabajoImpresionUpsertWithWhereUniqueWithoutCreadoPorInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    update: XOR<TrabajoImpresionUpdateWithoutCreadoPorInput, TrabajoImpresionUncheckedUpdateWithoutCreadoPorInput>
+    create: XOR<TrabajoImpresionCreateWithoutCreadoPorInput, TrabajoImpresionUncheckedCreateWithoutCreadoPorInput>
+  }
+
+  export type TrabajoImpresionUpdateWithWhereUniqueWithoutCreadoPorInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    data: XOR<TrabajoImpresionUpdateWithoutCreadoPorInput, TrabajoImpresionUncheckedUpdateWithoutCreadoPorInput>
+  }
+
+  export type TrabajoImpresionUpdateManyWithWhereWithoutCreadoPorInput = {
+    where: TrabajoImpresionScalarWhereInput
+    data: XOR<TrabajoImpresionUpdateManyMutationInput, TrabajoImpresionUncheckedUpdateManyWithoutCreadoPorInput>
+  }
+
+  export type TrabajoImpresionScalarWhereInput = {
+    AND?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+    OR?: TrabajoImpresionScalarWhereInput[]
+    NOT?: TrabajoImpresionScalarWhereInput | TrabajoImpresionScalarWhereInput[]
+    id?: IntFilter<"TrabajoImpresion"> | number
+    loteId?: IntFilter<"TrabajoImpresion"> | number
+    plantillaId?: IntFilter<"TrabajoImpresion"> | number
+    pesoBruto?: StringFilter<"TrabajoImpresion"> | string
+    unidadBruto?: StringFilter<"TrabajoImpresion"> | string
+    cantidadNeta?: StringNullableFilter<"TrabajoImpresion"> | string | null
+    unidadNeta?: StringFilter<"TrabajoImpresion"> | string
+    proforma?: StringFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringFilter<"TrabajoImpresion"> | string
+    estado?: EnumEstadoTrabajoImpresionFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
+    mensajeError?: StringNullableFilter<"TrabajoImpresion"> | string | null
+    creadoPorId?: IntFilter<"TrabajoImpresion"> | number
+    createdAt?: DateTimeFilter<"TrabajoImpresion"> | Date | string
+    updatedAt?: DateTimeFilter<"TrabajoImpresion"> | Date | string
+  }
+
   export type UsuarioCreateWithoutPermisosInput = {
     supabaseUserId: string
     nombre: string
     esAdmin?: boolean
     avatarUrl?: string | null
     createdAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionCreateNestedManyWithoutCreadoPorInput
   }
 
   export type UsuarioUncheckedCreateWithoutPermisosInput = {
@@ -10210,6 +12405,7 @@ export namespace Prisma {
     esAdmin?: boolean
     avatarUrl?: string | null
     createdAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedCreateNestedManyWithoutCreadoPorInput
   }
 
   export type UsuarioCreateOrConnectWithoutPermisosInput = {
@@ -10234,6 +12430,7 @@ export namespace Prisma {
     esAdmin?: BoolFieldUpdateOperationsInput | boolean
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUpdateManyWithoutCreadoPorNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutPermisosInput = {
@@ -10243,6 +12440,7 @@ export namespace Prisma {
     esAdmin?: BoolFieldUpdateOperationsInput | boolean
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedUpdateManyWithoutCreadoPorNestedInput
   }
 
   export type LoteCreateWithoutFabricanteInput = {
@@ -10254,6 +12452,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     producto: ProductoCreateNestedOneWithoutLotesInput
+    trabajosImpresion?: TrabajoImpresionCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUncheckedCreateWithoutFabricanteInput = {
@@ -10266,6 +12465,7 @@ export namespace Prisma {
     productoId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedCreateNestedManyWithoutLoteInput
   }
 
   export type LoteCreateOrConnectWithoutFabricanteInput = {
@@ -10319,6 +12519,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fabricante: FabricanteCreateNestedOneWithoutLotesInput
+    trabajosImpresion?: TrabajoImpresionCreateNestedManyWithoutLoteInput
   }
 
   export type LoteUncheckedCreateWithoutProductoInput = {
@@ -10331,6 +12532,7 @@ export namespace Prisma {
     fabricanteId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedCreateNestedManyWithoutLoteInput
   }
 
   export type LoteCreateOrConnectWithoutProductoInput = {
@@ -10357,6 +12559,63 @@ export namespace Prisma {
   export type LoteUpdateManyWithWhereWithoutProductoInput = {
     where: LoteScalarWhereInput
     data: XOR<LoteUpdateManyMutationInput, LoteUncheckedUpdateManyWithoutProductoInput>
+  }
+
+  export type TrabajoImpresionCreateWithoutPlantillaInput = {
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lote: LoteCreateNestedOneWithoutTrabajosImpresionInput
+    creadoPor: UsuarioCreateNestedOneWithoutTrabajosImpresionInput
+  }
+
+  export type TrabajoImpresionUncheckedCreateWithoutPlantillaInput = {
+    id?: number
+    loteId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    creadoPorId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionCreateOrConnectWithoutPlantillaInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    create: XOR<TrabajoImpresionCreateWithoutPlantillaInput, TrabajoImpresionUncheckedCreateWithoutPlantillaInput>
+  }
+
+  export type TrabajoImpresionCreateManyPlantillaInputEnvelope = {
+    data: TrabajoImpresionCreateManyPlantillaInput | TrabajoImpresionCreateManyPlantillaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TrabajoImpresionUpsertWithWhereUniqueWithoutPlantillaInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    update: XOR<TrabajoImpresionUpdateWithoutPlantillaInput, TrabajoImpresionUncheckedUpdateWithoutPlantillaInput>
+    create: XOR<TrabajoImpresionCreateWithoutPlantillaInput, TrabajoImpresionUncheckedCreateWithoutPlantillaInput>
+  }
+
+  export type TrabajoImpresionUpdateWithWhereUniqueWithoutPlantillaInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    data: XOR<TrabajoImpresionUpdateWithoutPlantillaInput, TrabajoImpresionUncheckedUpdateWithoutPlantillaInput>
+  }
+
+  export type TrabajoImpresionUpdateManyWithWhereWithoutPlantillaInput = {
+    where: TrabajoImpresionScalarWhereInput
+    data: XOR<TrabajoImpresionUpdateManyMutationInput, TrabajoImpresionUncheckedUpdateManyWithoutPlantillaInput>
   }
 
   export type ProductoCreateWithoutLotesInput = {
@@ -10403,6 +12662,47 @@ export namespace Prisma {
   export type FabricanteCreateOrConnectWithoutLotesInput = {
     where: FabricanteWhereUniqueInput
     create: XOR<FabricanteCreateWithoutLotesInput, FabricanteUncheckedCreateWithoutLotesInput>
+  }
+
+  export type TrabajoImpresionCreateWithoutLoteInput = {
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plantilla: PlantillaCreateNestedOneWithoutTrabajosImpresionInput
+    creadoPor: UsuarioCreateNestedOneWithoutTrabajosImpresionInput
+  }
+
+  export type TrabajoImpresionUncheckedCreateWithoutLoteInput = {
+    id?: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    creadoPorId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionCreateOrConnectWithoutLoteInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    create: XOR<TrabajoImpresionCreateWithoutLoteInput, TrabajoImpresionUncheckedCreateWithoutLoteInput>
+  }
+
+  export type TrabajoImpresionCreateManyLoteInputEnvelope = {
+    data: TrabajoImpresionCreateManyLoteInput | TrabajoImpresionCreateManyLoteInput[]
+    skipDuplicates?: boolean
   }
 
   export type ProductoUpsertWithoutLotesInput = {
@@ -10463,6 +12763,192 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TrabajoImpresionUpsertWithWhereUniqueWithoutLoteInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    update: XOR<TrabajoImpresionUpdateWithoutLoteInput, TrabajoImpresionUncheckedUpdateWithoutLoteInput>
+    create: XOR<TrabajoImpresionCreateWithoutLoteInput, TrabajoImpresionUncheckedCreateWithoutLoteInput>
+  }
+
+  export type TrabajoImpresionUpdateWithWhereUniqueWithoutLoteInput = {
+    where: TrabajoImpresionWhereUniqueInput
+    data: XOR<TrabajoImpresionUpdateWithoutLoteInput, TrabajoImpresionUncheckedUpdateWithoutLoteInput>
+  }
+
+  export type TrabajoImpresionUpdateManyWithWhereWithoutLoteInput = {
+    where: TrabajoImpresionScalarWhereInput
+    data: XOR<TrabajoImpresionUpdateManyMutationInput, TrabajoImpresionUncheckedUpdateManyWithoutLoteInput>
+  }
+
+  export type LoteCreateWithoutTrabajosImpresionInput = {
+    numeroLote: string
+    fechaFabricacion: string
+    fechaVencimiento: string
+    fechaVencimientoOrden?: Date | string | null
+    coaUrl?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    producto: ProductoCreateNestedOneWithoutLotesInput
+    fabricante: FabricanteCreateNestedOneWithoutLotesInput
+  }
+
+  export type LoteUncheckedCreateWithoutTrabajosImpresionInput = {
+    id?: number
+    numeroLote: string
+    fechaFabricacion: string
+    fechaVencimiento: string
+    fechaVencimientoOrden?: Date | string | null
+    coaUrl?: string | null
+    productoId: number
+    fabricanteId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LoteCreateOrConnectWithoutTrabajosImpresionInput = {
+    where: LoteWhereUniqueInput
+    create: XOR<LoteCreateWithoutTrabajosImpresionInput, LoteUncheckedCreateWithoutTrabajosImpresionInput>
+  }
+
+  export type PlantillaCreateWithoutTrabajosImpresionInput = {
+    nombre: string
+    archivo: string
+    activa?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PlantillaUncheckedCreateWithoutTrabajosImpresionInput = {
+    id?: number
+    nombre: string
+    archivo: string
+    activa?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PlantillaCreateOrConnectWithoutTrabajosImpresionInput = {
+    where: PlantillaWhereUniqueInput
+    create: XOR<PlantillaCreateWithoutTrabajosImpresionInput, PlantillaUncheckedCreateWithoutTrabajosImpresionInput>
+  }
+
+  export type UsuarioCreateWithoutTrabajosImpresionInput = {
+    supabaseUserId: string
+    nombre: string
+    esAdmin?: boolean
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    permisos?: PermisoCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutTrabajosImpresionInput = {
+    id?: number
+    supabaseUserId: string
+    nombre: string
+    esAdmin?: boolean
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    permisos?: PermisoUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutTrabajosImpresionInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutTrabajosImpresionInput, UsuarioUncheckedCreateWithoutTrabajosImpresionInput>
+  }
+
+  export type LoteUpsertWithoutTrabajosImpresionInput = {
+    update: XOR<LoteUpdateWithoutTrabajosImpresionInput, LoteUncheckedUpdateWithoutTrabajosImpresionInput>
+    create: XOR<LoteCreateWithoutTrabajosImpresionInput, LoteUncheckedCreateWithoutTrabajosImpresionInput>
+    where?: LoteWhereInput
+  }
+
+  export type LoteUpdateToOneWithWhereWithoutTrabajosImpresionInput = {
+    where?: LoteWhereInput
+    data: XOR<LoteUpdateWithoutTrabajosImpresionInput, LoteUncheckedUpdateWithoutTrabajosImpresionInput>
+  }
+
+  export type LoteUpdateWithoutTrabajosImpresionInput = {
+    numeroLote?: StringFieldUpdateOperationsInput | string
+    fechaFabricacion?: StringFieldUpdateOperationsInput | string
+    fechaVencimiento?: StringFieldUpdateOperationsInput | string
+    fechaVencimientoOrden?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    coaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    producto?: ProductoUpdateOneRequiredWithoutLotesNestedInput
+    fabricante?: FabricanteUpdateOneRequiredWithoutLotesNestedInput
+  }
+
+  export type LoteUncheckedUpdateWithoutTrabajosImpresionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    numeroLote?: StringFieldUpdateOperationsInput | string
+    fechaFabricacion?: StringFieldUpdateOperationsInput | string
+    fechaVencimiento?: StringFieldUpdateOperationsInput | string
+    fechaVencimientoOrden?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    coaUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    productoId?: IntFieldUpdateOperationsInput | number
+    fabricanteId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlantillaUpsertWithoutTrabajosImpresionInput = {
+    update: XOR<PlantillaUpdateWithoutTrabajosImpresionInput, PlantillaUncheckedUpdateWithoutTrabajosImpresionInput>
+    create: XOR<PlantillaCreateWithoutTrabajosImpresionInput, PlantillaUncheckedCreateWithoutTrabajosImpresionInput>
+    where?: PlantillaWhereInput
+  }
+
+  export type PlantillaUpdateToOneWithWhereWithoutTrabajosImpresionInput = {
+    where?: PlantillaWhereInput
+    data: XOR<PlantillaUpdateWithoutTrabajosImpresionInput, PlantillaUncheckedUpdateWithoutTrabajosImpresionInput>
+  }
+
+  export type PlantillaUpdateWithoutTrabajosImpresionInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    archivo?: StringFieldUpdateOperationsInput | string
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlantillaUncheckedUpdateWithoutTrabajosImpresionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    archivo?: StringFieldUpdateOperationsInput | string
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsuarioUpsertWithoutTrabajosImpresionInput = {
+    update: XOR<UsuarioUpdateWithoutTrabajosImpresionInput, UsuarioUncheckedUpdateWithoutTrabajosImpresionInput>
+    create: XOR<UsuarioCreateWithoutTrabajosImpresionInput, UsuarioUncheckedCreateWithoutTrabajosImpresionInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutTrabajosImpresionInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutTrabajosImpresionInput, UsuarioUncheckedUpdateWithoutTrabajosImpresionInput>
+  }
+
+  export type UsuarioUpdateWithoutTrabajosImpresionInput = {
+    supabaseUserId?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    esAdmin?: BoolFieldUpdateOperationsInput | boolean
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permisos?: PermisoUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutTrabajosImpresionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    supabaseUserId?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    esAdmin?: BoolFieldUpdateOperationsInput | boolean
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permisos?: PermisoUncheckedUpdateManyWithoutUsuarioNestedInput
+  }
+
   export type PermisoCreateManyUsuarioInput = {
     id?: number
     recurso: $Enums.Recurso
@@ -10470,6 +12956,22 @@ export namespace Prisma {
     puedeCrear?: boolean
     puedeEditar?: boolean
     puedeEliminar?: boolean
+  }
+
+  export type TrabajoImpresionCreateManyCreadoPorInput = {
+    id?: number
+    loteId: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PermisoUpdateWithoutUsuarioInput = {
@@ -10498,6 +13000,53 @@ export namespace Prisma {
     puedeEliminar?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type TrabajoImpresionUpdateWithoutCreadoPorInput = {
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lote?: LoteUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+    plantilla?: PlantillaUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+  }
+
+  export type TrabajoImpresionUncheckedUpdateWithoutCreadoPorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    loteId?: IntFieldUpdateOperationsInput | number
+    plantillaId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyWithoutCreadoPorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    loteId?: IntFieldUpdateOperationsInput | number
+    plantillaId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type LoteCreateManyFabricanteInput = {
     id?: number
     numeroLote: string
@@ -10519,6 +13068,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     producto?: ProductoUpdateOneRequiredWithoutLotesNestedInput
+    trabajosImpresion?: TrabajoImpresionUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateWithoutFabricanteInput = {
@@ -10531,6 +13081,7 @@ export namespace Prisma {
     productoId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateManyWithoutFabricanteInput = {
@@ -10566,6 +13117,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fabricante?: FabricanteUpdateOneRequiredWithoutLotesNestedInput
+    trabajosImpresion?: TrabajoImpresionUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateWithoutProductoInput = {
@@ -10578,6 +13130,7 @@ export namespace Prisma {
     fabricanteId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trabajosImpresion?: TrabajoImpresionUncheckedUpdateManyWithoutLoteNestedInput
   }
 
   export type LoteUncheckedUpdateManyWithoutProductoInput = {
@@ -10588,6 +13141,132 @@ export namespace Prisma {
     fechaVencimientoOrden?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     coaUrl?: NullableStringFieldUpdateOperationsInput | string | null
     fabricanteId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionCreateManyPlantillaInput = {
+    id?: number
+    loteId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    creadoPorId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionUpdateWithoutPlantillaInput = {
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lote?: LoteUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+    creadoPor?: UsuarioUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+  }
+
+  export type TrabajoImpresionUncheckedUpdateWithoutPlantillaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    loteId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoPorId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyWithoutPlantillaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    loteId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoPorId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionCreateManyLoteInput = {
+    id?: number
+    plantillaId: number
+    pesoBruto: string
+    unidadBruto: string
+    cantidadNeta?: string | null
+    unidadNeta: string
+    proforma: string
+    imagenPath: string
+    estado?: $Enums.EstadoTrabajoImpresion
+    mensajeError?: string | null
+    creadoPorId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TrabajoImpresionUpdateWithoutLoteInput = {
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plantilla?: PlantillaUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+    creadoPor?: UsuarioUpdateOneRequiredWithoutTrabajosImpresionNestedInput
+  }
+
+  export type TrabajoImpresionUncheckedUpdateWithoutLoteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    plantillaId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoPorId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TrabajoImpresionUncheckedUpdateManyWithoutLoteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    plantillaId?: IntFieldUpdateOperationsInput | number
+    pesoBruto?: StringFieldUpdateOperationsInput | string
+    unidadBruto?: StringFieldUpdateOperationsInput | string
+    cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
+    unidadNeta?: StringFieldUpdateOperationsInput | string
+    proforma?: StringFieldUpdateOperationsInput | string
+    imagenPath?: StringFieldUpdateOperationsInput | string
+    estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
+    mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoPorId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
