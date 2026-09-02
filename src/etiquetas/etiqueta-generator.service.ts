@@ -6,6 +6,7 @@ import puppeteer, { Browser } from 'puppeteer';
 import {
   ETIQUETA_LABEL_PX,
   ETIQUETA_EMPRESA_CONFIG,
+  ETIQUETA_FUENTE_CONFIG,
 } from '../config/etiqueta.config';
 
 interface EtiquetaParaGenerar {
@@ -31,6 +32,8 @@ export class EtiquetaGeneratorService {
   private fondoBase64: string | null = null;
   private fondoRomboBase64: string | null = null;
   private fondoBlancoBase64: string | null = null; // nuevo
+  private fontBase64: string | null = null;
+  private fontBoldBase64: string | null = null;
 
   private async getBrowser(): Promise<Browser> {
     if (!this.browser) {
@@ -88,6 +91,24 @@ export class EtiquetaGeneratorService {
     return this.fondoMuestrasBase64;
   }
 
+  private getFontBase64(): string {
+    if (!this.fontBase64) {
+      this.fontBase64 = fs
+        .readFileSync(ETIQUETA_FUENTE_CONFIG.fontPath)
+        .toString('base64');
+    }
+    return this.fontBase64;
+  }
+
+  private getFontBoldBase64(): string {
+    if (!this.fontBoldBase64) {
+      this.fontBoldBase64 = fs
+        .readFileSync(ETIQUETA_FUENTE_CONFIG.fontBoldPath)
+        .toString('base64');
+    }
+    return this.fontBoldBase64;
+  }
+
   private construirHtml(
     archivo: string,
     etiqueta: EtiquetaParaGenerar,
@@ -111,6 +132,8 @@ export class EtiquetaGeneratorService {
       widthPx: ETIQUETA_LABEL_PX.width,
       heightPx: ETIQUETA_LABEL_PX.height,
       fondoBase64,
+      fontBase64: this.getFontBase64(),
+      fontBoldBase64: this.getFontBoldBase64(),
       fallbackFontFamily: 'Arial, sans-serif',
       producto: etiqueta.producto,
       numeroLote: etiqueta.numeroLote,

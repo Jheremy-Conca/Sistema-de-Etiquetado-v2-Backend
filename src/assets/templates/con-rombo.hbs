@@ -4,10 +4,21 @@
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
 
+      @font-face {
+        font-family: 'Selawik';
+        src: url('data:font/truetype;base64,{{{fontBase64}}}') format('truetype');
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: 'Selawik';
+        src: url('data:font/truetype;base64,{{{fontBoldBase64}}}') format('truetype');
+        font-weight: bold;
+      }
+
       body {
         width:{{widthPx}}px;
           height:{{heightPx}}px;
-          font-family: 'Segoe UI',{{{fallbackFontFamily}}};
+          font-family: 'Selawik', 'Segoe UI', {{{fallbackFontFamily}}};
         }
 
         .etiqueta {
@@ -153,7 +164,7 @@
           text-align: center;
           font-weight: 700;
           font-size: 48px;
-          font-family: 'Myriad Pro', 'Segoe UI',{{{fallbackFontFamily}}};
+          font-family: 'Myriad Pro', 'Selawik', 'Segoe UI', {{{fallbackFontFamily}}};
           transform: translate(-50%, -50%);
         }
         .nfpa-salud {

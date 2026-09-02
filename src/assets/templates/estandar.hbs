@@ -19,14 +19,26 @@
       */
 
       /*
-        FIX de la "J" asimétrica: antes se embebía Selawik (vía
-        fontBase64/fontBoldBase64) como sustituto libre de Segoe UI,
-        porque Segoe UI es propietaria y no se puede redistribuir en
-        la app. Pero el backend corre en la MISMA PC Windows de la
-        impresora, que ya tiene Segoe UI instalada de fábrica -> no
-        hace falta sustituto, se referencia por nombre y Chromium la
-        toma del sistema, igual que Illustrator.
+        FUENTE: se embebe Selawik como sustituto libre de Segoe UI
+        (Segoe UI es propietaria y no se puede redistribuir). Antes
+        se referenciaba 'Segoe UI' por nombre asumiendo que el backend
+        corría en la MISMA PC Windows de la impresora (que la trae de
+        fábrica) -> eso dejó de ser cierto al mover el backend a Render
+        (Linux, sin Segoe UI ni Selawik instaladas), así que las
+        etiquetas caían al fallback Arial. Se vuelve a embeber Selawik
+        vía @font-face + base64 para que el render sea idéntico sin
+        importar el sistema operativo donde corra Puppeteer.
       */
+      @font-face {
+        font-family: 'Selawik';
+        src: url('data:font/truetype;base64,{{{fontBase64}}}') format('truetype');
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: 'Selawik';
+        src: url('data:font/truetype;base64,{{{fontBoldBase64}}}') format('truetype');
+        font-weight: bold;
+      }
 
       body {
         /*
@@ -43,7 +55,7 @@
         */
         width:{{widthPx}}px;
                                   height:{{heightPx}}px;
-                                  font-family: 'Segoe UI',{{{fallbackFontFamily}}};
+                                  font-family: 'Selawik', 'Segoe UI', {{{fallbackFontFamily}}};
                                 }
 
                                 .etiqueta {
