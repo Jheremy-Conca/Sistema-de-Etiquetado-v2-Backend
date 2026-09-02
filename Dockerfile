@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:22-slim
 
 # Librerías del sistema que necesita Chromium en runtime
 RUN apt-get update && apt-get install -y \
