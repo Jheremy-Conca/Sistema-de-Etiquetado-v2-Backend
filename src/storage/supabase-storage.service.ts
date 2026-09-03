@@ -24,8 +24,21 @@ export class SupabaseStorageService {
     this.client = createClient(url, key);
   }
 
+  private sanearNombreArchivo(nombreOriginal: string): string {
+    const partes = nombreOriginal.split('.');
+    const ext = partes.length > 1 ? partes.pop() : '';
+    const base = partes.join('.')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita tildes
+      .replace(/[^a-zA-Z0-9._-]/g, '-')                  // %, espacios, etc. -> "-"
+      .replace(/-+/g, '-')                               // colapsa guiones repetidos
+      .replace(/^-|-$/g, '');                            // sin guion al inicio/fin
+
+    return ext ? `${base}.${ext}` : base;
+  }
+
   async uploadCoa(loteId: number, file: Express.Multer.File): Promise<string> {
-    const path = `lote-${loteId}/${Date.now()}-${file.originalname}`;
+    const nombreSaneado = this.sanearNombreArchivo(file.originalname);
+    const path = `lote-${loteId}/${Date.now()}-${nombreSaneado}`;
 
     const { error } = await this.client.storage
       .from(this.bucket)
