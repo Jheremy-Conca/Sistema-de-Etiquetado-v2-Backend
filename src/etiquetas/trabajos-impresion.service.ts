@@ -1,44 +1,20 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { EtiquetaGeneratorService } from './etiqueta-generator.service';
-import { SupabaseStorageService } from '../storage/supabase-storage.service';
 import { GenerarEtiquetaDto } from './dto/generar-etiqueta.dto';
 import { ActualizarEstadoTrabajoDto } from './dto/actualizar-estado-trabajo.dto';
 
 @Injectable()
 export class TrabajosImpresionService {
-  constructor(
-    private prisma: PrismaService,
-    private generator: EtiquetaGeneratorService,
-    private storage: SupabaseStorageService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async crear(dto: GenerarEtiquetaDto, creadoPorId: number) {
     const [lote, plantilla] = await Promise.all([
-      this.prisma.lote.findUnique({ where: { id: dto.loteId }, include: { producto: true, fabricante: true } }),
+      this.prisma.lote.findUnique({ where: { id: dto.loteId } }),
       this.prisma.plantilla.findUnique({ where: { id: dto.plantillaId } }),
     ]);
 
     if (!lote) throw new NotFoundException(`Lote con id ${dto.loteId} no encontrado`);
     if (!plantilla) throw new NotFoundException(`Plantilla con id ${dto.plantillaId} no encontrada`);
-
-    const imagen = await this.generator.generarImagen(plantilla.archivo, {
-      producto: lote.producto.nombre,
-      numeroLote: lote.numeroLote,
-      fabricante: lote.fabricante.nombre,
-      fechaFabricacion: lote.fechaFabricacion,
-      fechaVencimiento: lote.fechaVencimiento,
-      pesoBruto: dto.pesoBruto,
-      unidadBruto: dto.unidadBruto,
-      cantidadNeta: dto.cantidadNeta,
-      unidadNeta: dto.unidadNeta,
-      proforma: dto.proforma,
-      nfpaSalud: lote.producto.nfpaSalud,
-      nfpaInflamabilidad: lote.producto.nfpaInflamabilidad,
-      nfpaReactividad: lote.producto.nfpaReactividad,
-    });
-
-    const imagenPath = await this.storage.uploadTrabajoImpresion(imagen);
 
     const trabajo = await this.prisma.trabajoImpresion.create({
       data: {
@@ -49,7 +25,6 @@ export class TrabajosImpresionService {
         cantidadNeta: dto.cantidadNeta,
         unidadNeta: dto.unidadNeta,
         proforma: dto.proforma,
-        imagenPath,
         creadoPorId,
       },
     });
@@ -61,14 +36,29 @@ export class TrabajosImpresionService {
     const pendientes = await this.prisma.trabajoImpresion.findMany({
       where: { estado: 'PENDIENTE' },
       orderBy: { createdAt: 'asc' },
+      include: {
+        lote: { include: { producto: true, fabricante: true } },
+        plantilla: true,
+      },
     });
 
-    return Promise.all(
-      pendientes.map(async (t) => ({
-        id: t.id,
-        imagenUrl: await this.storage.getSignedUrlTrabajoImpresion(t.imagenPath),
-      })),
-    );
+    return pendientes.map((t) => ({
+      id: t.id,
+      plantillaArchivo: t.plantilla.archivo,
+      producto: t.lote.producto.nombre,
+      numeroLote: t.lote.numeroLote,
+      fabricante: t.lote.fabricante.nombre,
+      fechaFabricacion: t.lote.fechaFabricacion,
+      fechaVencimiento: t.lote.fechaVencimiento,
+      pesoBruto: t.pesoBruto,
+      unidadBruto: t.unidadBruto,
+      cantidadNeta: t.cantidadNeta,
+      unidadNeta: t.unidadNeta,
+      proforma: t.proforma,
+      nfpaSalud: t.lote.producto.nfpaSalud,
+      nfpaInflamabilidad: t.lote.producto.nfpaInflamabilidad,
+      nfpaReactividad: t.lote.producto.nfpaReactividad,
+    }));
   }
 
   async actualizarEstado(id: number, dto: ActualizarEstadoTrabajoDto) {

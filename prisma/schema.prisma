@@ -162,7 +162,7 @@ model TrabajoImpresion {
   cantidadNeta String?
   unidadNeta   String
   proforma     String
-  imagenPath   String
+imagenPath   String?
   estado       EstadoTrabajoImpresion @default(PENDIENTE)
   mensajeError String?
   creadoPorId  Int

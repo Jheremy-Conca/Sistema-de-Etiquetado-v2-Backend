@@ -8754,7 +8754,7 @@ export namespace Prisma {
     cantidadNeta: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath: string | null
     estado: $Enums.EstadoTrabajoImpresion
     mensajeError: string | null
     creadoPorId: number
@@ -8891,7 +8891,7 @@ export namespace Prisma {
       cantidadNeta: string | null
       unidadNeta: string
       proforma: string
-      imagenPath: string
+      imagenPath: string | null
       estado: $Enums.EstadoTrabajoImpresion
       mensajeError: string | null
       creadoPorId: number
@@ -10416,7 +10416,7 @@ export namespace Prisma {
     cantidadNeta?: StringNullableFilter<"TrabajoImpresion"> | string | null
     unidadNeta?: StringFilter<"TrabajoImpresion"> | string
     proforma?: StringFilter<"TrabajoImpresion"> | string
-    imagenPath?: StringFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringNullableFilter<"TrabajoImpresion"> | string | null
     estado?: EnumEstadoTrabajoImpresionFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
     mensajeError?: StringNullableFilter<"TrabajoImpresion"> | string | null
     creadoPorId?: IntFilter<"TrabajoImpresion"> | number
@@ -10436,7 +10436,7 @@ export namespace Prisma {
     cantidadNeta?: SortOrderInput | SortOrder
     unidadNeta?: SortOrder
     proforma?: SortOrder
-    imagenPath?: SortOrder
+    imagenPath?: SortOrderInput | SortOrder
     estado?: SortOrder
     mensajeError?: SortOrderInput | SortOrder
     creadoPorId?: SortOrder
@@ -10459,7 +10459,7 @@ export namespace Prisma {
     cantidadNeta?: StringNullableFilter<"TrabajoImpresion"> | string | null
     unidadNeta?: StringFilter<"TrabajoImpresion"> | string
     proforma?: StringFilter<"TrabajoImpresion"> | string
-    imagenPath?: StringFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringNullableFilter<"TrabajoImpresion"> | string | null
     estado?: EnumEstadoTrabajoImpresionFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
     mensajeError?: StringNullableFilter<"TrabajoImpresion"> | string | null
     creadoPorId?: IntFilter<"TrabajoImpresion"> | number
@@ -10479,7 +10479,7 @@ export namespace Prisma {
     cantidadNeta?: SortOrderInput | SortOrder
     unidadNeta?: SortOrder
     proforma?: SortOrder
-    imagenPath?: SortOrder
+    imagenPath?: SortOrderInput | SortOrder
     estado?: SortOrder
     mensajeError?: SortOrderInput | SortOrder
     creadoPorId?: SortOrder
@@ -10504,7 +10504,7 @@ export namespace Prisma {
     cantidadNeta?: StringNullableWithAggregatesFilter<"TrabajoImpresion"> | string | null
     unidadNeta?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
     proforma?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
-    imagenPath?: StringWithAggregatesFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringNullableWithAggregatesFilter<"TrabajoImpresion"> | string | null
     estado?: EnumEstadoTrabajoImpresionWithAggregatesFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
     mensajeError?: StringNullableWithAggregatesFilter<"TrabajoImpresion"> | string | null
     creadoPorId?: IntWithAggregatesFilter<"TrabajoImpresion"> | number
@@ -10941,7 +10941,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     createdAt?: Date | string
@@ -10960,7 +10960,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     creadoPorId: number
@@ -10974,7 +10974,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10993,7 +10993,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     creadoPorId?: IntFieldUpdateOperationsInput | number
@@ -11010,7 +11010,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     creadoPorId: number
@@ -11024,7 +11024,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11040,7 +11040,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     creadoPorId?: IntFieldUpdateOperationsInput | number
@@ -12289,7 +12289,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     createdAt?: Date | string
@@ -12307,7 +12307,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     createdAt?: Date | string
@@ -12381,7 +12381,7 @@ export namespace Prisma {
     cantidadNeta?: StringNullableFilter<"TrabajoImpresion"> | string | null
     unidadNeta?: StringFilter<"TrabajoImpresion"> | string
     proforma?: StringFilter<"TrabajoImpresion"> | string
-    imagenPath?: StringFilter<"TrabajoImpresion"> | string
+    imagenPath?: StringNullableFilter<"TrabajoImpresion"> | string | null
     estado?: EnumEstadoTrabajoImpresionFilter<"TrabajoImpresion"> | $Enums.EstadoTrabajoImpresion
     mensajeError?: StringNullableFilter<"TrabajoImpresion"> | string | null
     creadoPorId?: IntFilter<"TrabajoImpresion"> | number
@@ -12567,7 +12567,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     createdAt?: Date | string
@@ -12584,7 +12584,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     creadoPorId: number
@@ -12670,7 +12670,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     createdAt?: Date | string
@@ -12687,7 +12687,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     creadoPorId: number
@@ -12967,7 +12967,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     createdAt?: Date | string
@@ -13006,7 +13006,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13024,7 +13024,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13040,7 +13040,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13153,7 +13153,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     creadoPorId: number
@@ -13167,7 +13167,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13184,7 +13184,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     creadoPorId?: IntFieldUpdateOperationsInput | number
@@ -13200,7 +13200,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     creadoPorId?: IntFieldUpdateOperationsInput | number
@@ -13216,7 +13216,7 @@ export namespace Prisma {
     cantidadNeta?: string | null
     unidadNeta: string
     proforma: string
-    imagenPath: string
+    imagenPath?: string | null
     estado?: $Enums.EstadoTrabajoImpresion
     mensajeError?: string | null
     creadoPorId: number
@@ -13230,7 +13230,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13247,7 +13247,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     creadoPorId?: IntFieldUpdateOperationsInput | number
@@ -13263,7 +13263,7 @@ export namespace Prisma {
     cantidadNeta?: NullableStringFieldUpdateOperationsInput | string | null
     unidadNeta?: StringFieldUpdateOperationsInput | string
     proforma?: StringFieldUpdateOperationsInput | string
-    imagenPath?: StringFieldUpdateOperationsInput | string
+    imagenPath?: NullableStringFieldUpdateOperationsInput | string | null
     estado?: EnumEstadoTrabajoImpresionFieldUpdateOperationsInput | $Enums.EstadoTrabajoImpresion
     mensajeError?: NullableStringFieldUpdateOperationsInput | string | null
     creadoPorId?: IntFieldUpdateOperationsInput | number
